@@ -1,0 +1,10 @@
+Following is the list of Product codes and Vehicle Category.
+
+
+
+Product Code Description
+MOT-PRD-001 PRIVATE CAR
+MOT-PRD-002 MOTORISED-TWO WHEELERS
+MOT-PRD-003 GCCV
+MOT-PRD-004 TRAILERS
+MOT-PRD-005 PCCV

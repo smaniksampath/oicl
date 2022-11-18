@@ -1,0 +1,725 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="License_ExpiryDate_Update" this:License_ExpiryDate_Update.Is_Details_Available="True" this:License_ExpiryDate_Update.Is_Survey_Captured="True" this:License_ExpiryDate_Update.in_DB_ConnectionString="Dsn=OICL;uid=oicl_user;pwd=oicl_user;Database=oicl_dev3" this:License_ExpiryDate_Update.in_Surveyor_Code="GH0000050284" this:License_ExpiryDate_Update.in_Expiry_Date="2021-05-28" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:sc="clr-namespace:System.ComponentModel;assembly=System" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:snm="clr-namespace:System.Net.Mail;assembly=System" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="Is_Details_Available" Type="InArgument(x:Boolean)" />
+    <x:Property Name="Is_Survey_Captured" Type="InArgument(x:Boolean)" />
+    <x:Property Name="Is_Broker_Captured" Type="InArgument(x:Boolean)" />
+    <x:Property Name="Is_Email_Captured" Type="InArgument(x:Boolean)" />
+    <x:Property Name="Mail_Subject_Inbox" Type="InArgument(x:String)" />
+    <x:Property Name="Mail_From_Condition" Type="InArgument(x:String)" />
+    <x:Property Name="in_DB_ConnectionString" Type="InArgument(x:String)" />
+    <x:Property Name="in_DB_Name" Type="InArgument(x:String)" />
+    <x:Property Name="in_Surveyor_Code" Type="InArgument(x:String)" />
+    <x:Property Name="in_Broker_Code" Type="InArgument(x:String)" />
+    <x:Property Name="in_Email_ID" Type="InArgument(x:String)" />
+    <x:Property Name="in_Expiry_Date" Type="InArgument(x:String)" />
+    <x:Property Name="in_Received_Mail" Type="InArgument(snm:MailMessage)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>1141,10377</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>License_ExpiryDate_Update_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="70">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Security</x:String>
+      <x:String>UiPath.Database</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.Mail</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Runtime.InteropServices</x:String>
+      <x:String>System.Activities.DynamicUpdate</x:String>
+      <x:String>UiPath.Database.Activities</x:String>
+      <x:String>UiPath.Mail.SMTP.Activities</x:String>
+      <x:String>UiPath.Mail.Activities</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>UiPath.Mail.Outlook.Activities</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Database</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>UiPath.Database.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>NPOI</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="License_ExpiryDate_Update" sap:VirtualizedContainerService.HintSize="1151,10312" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="DB_ConnectionString" />
+      <Variable x:TypeArguments="ui:DatabaseConnection" Name="DB_Conn" />
+      <Variable x:TypeArguments="x:String" Name="userid_tbl" />
+      <Variable x:TypeArguments="x:String" Name="Expiry_Date_tbl" />
+      <Variable x:TypeArguments="x:String" Name="Query_Result" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_Query_Result" />
+      <Variable x:TypeArguments="x:Int32" Name="Query_Result_Update" />
+      <Variable x:TypeArguments="x:String" Name="Mail_Body_Sent" />
+      <Variable x:TypeArguments="x:String" Name="User_Id_tbl" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="1089,71" sap2010:WorkflowViewState.IdRef="WriteLine_6" Text="mySQL - License Expiry update was started..." />
+    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="1089,10079" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <TryCatch.Try>
+        <Sequence DisplayName="mySQL" sap:VirtualizedContainerService.HintSize="1051,9842" sap2010:WorkflowViewState.IdRef="Sequence_23">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <If Condition="[Is_Details_Available]" sap:VirtualizedContainerService.HintSize="989,9720" sap2010:WorkflowViewState.IdRef="If_4">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <If.Then>
+              <Sequence sap:VirtualizedContainerService.HintSize="953,9523" sap2010:WorkflowViewState.IdRef="Sequence_21">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <Sequence DisplayName="Connect-DB" sap:VirtualizedContainerService.HintSize="891,440" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ui:DatabaseConnect DatabaseConnection="[DB_Conn]" DisplayName="Connect to database" sap:VirtualizedContainerService.HintSize="338,69" sap2010:WorkflowViewState.IdRef="DatabaseConnect_1" ProviderName="System.Data.Odbc" ConnectionString="[In_DB_ConnectionString]" />
+                  <ui:ExecuteQuery ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DataTable="[dt_Query_Result]" DisplayName="Run query" ExistingDbConnection="[DB_Conn]" sap:VirtualizedContainerService.HintSize="338,98" sap2010:WorkflowViewState.IdRef="ExecuteQuery_1" Sql="[&quot;use &quot;+In_DB_Name+&quot;;&quot;]">
+                    <ui:ExecuteQuery.Parameters>
+                      <scg:Dictionary x:TypeArguments="x:String, Argument" />
+                    </ui:ExecuteQuery.Parameters>
+                  </ui:ExecuteQuery>
+                  <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="338,71" sap2010:WorkflowViewState.IdRef="WriteLine_1" Text="DB connected.." />
+                </Sequence>
+                <Sequence DisplayName="UpdateExpiry" sap:VirtualizedContainerService.HintSize="891,8921" sap2010:WorkflowViewState.IdRef="Sequence_20">
+                  <Sequence.Variables>
+                    <Variable x:TypeArguments="x:Boolean" Default="False" Name="Is_Expiry_Updated" />
+                  </Sequence.Variables>
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <If Condition="[Is_Email_Captured]" sap:VirtualizedContainerService.HintSize="829,1867" sap2010:WorkflowViewState.IdRef="If_7">
+                    <If.Then>
+                      <Sequence sap:VirtualizedContainerService.HintSize="793,1670" sap2010:WorkflowViewState.IdRef="Sequence_35">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="731,71" sap2010:WorkflowViewState.IdRef="WriteLine_27" Text="[&quot;Is_Email_Captured : &quot;+Is_Email_Captured.ToString]" />
+                        <ui:ExecuteQuery ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DataTable="[dt_Query_Result]" DisplayName="Run query" ExistingDbConnection="[DB_Conn]" sap:VirtualizedContainerService.HintSize="731,98" sap2010:WorkflowViewState.IdRef="ExecuteQuery_8" Sql="[&quot;SELECT * FROM users WHERE email='&quot;+in_Email_ID+&quot;';&quot;]">
+                          <ui:ExecuteQuery.Parameters>
+                            <InArgument x:TypeArguments="x:String" x:Key="param_Surveyor_Code">[in_Surveyor_Code]</InArgument>
+                          </ui:ExecuteQuery.Parameters>
+                        </ui:ExecuteQuery>
+                        <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="731,71" sap2010:WorkflowViewState.IdRef="WriteLine_28" Text="[&quot;tbl-&gt;users - rows count : &quot;+dt_Query_Result.Rows.Count.ToString]" />
+                        <If Condition="[dt_Query_Result.Rows.Count&gt;0]" DisplayName="If-User_tableExists" sap:VirtualizedContainerService.HintSize="731,1188" sap2010:WorkflowViewState.IdRef="If_8">
+                          <If.Then>
+                            <Sequence sap:VirtualizedContainerService.HintSize="695,998" sap2010:WorkflowViewState.IdRef="Sequence_38">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <Sequence sap:VirtualizedContainerService.HintSize="653,252" sap2010:WorkflowViewState.IdRef="Sequence_33">
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                                <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_10">
+                                  <Assign.To>
+                                    <OutArgument x:TypeArguments="x:String">[userid_tbl]</OutArgument>
+                                  </Assign.To>
+                                  <Assign.Value>
+                                    <InArgument x:TypeArguments="x:String">[dt_Query_Result.Rows(0)("ID").ToString]</InArgument>
+                                  </Assign.Value>
+                                </Assign>
+                                <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_19">
+                                  <Assign.To>
+                                    <OutArgument x:TypeArguments="x:String">[User_Id_tbl]</OutArgument>
+                                  </Assign.To>
+                                  <Assign.Value>
+                                    <InArgument x:TypeArguments="x:String">[dt_Query_Result.Rows(0)("user_id").ToString]</InArgument>
+                                  </Assign.Value>
+                                </Assign>
+                              </Sequence>
+                              <If Condition="[User_Id_tbl.ToString.ToLower.Trim.Contains(&quot;gh&quot;)]" sap:VirtualizedContainerService.HintSize="653,614" sap2010:WorkflowViewState.IdRef="If_9">
+                                <If.Then>
+                                  <Sequence sap:VirtualizedContainerService.HintSize="304,454" sap2010:WorkflowViewState.IdRef="Sequence_39">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_13">
+                                      <Assign.To>
+                                        <OutArgument x:TypeArguments="x:Boolean">[Is_Survey_Captured]</OutArgument>
+                                      </Assign.To>
+                                      <Assign.Value>
+                                        <InArgument x:TypeArguments="x:Boolean">True</InArgument>
+                                      </Assign.Value>
+                                    </Assign>
+                                    <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_15">
+                                      <Assign.To>
+                                        <OutArgument x:TypeArguments="x:Boolean">[Is_Broker_Captured]</OutArgument>
+                                      </Assign.To>
+                                      <Assign.Value>
+                                        <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+                                      </Assign.Value>
+                                    </Assign>
+                                    <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_16">
+                                      <Assign.To>
+                                        <OutArgument x:TypeArguments="x:String">[in_Surveyor_Code]</OutArgument>
+                                      </Assign.To>
+                                      <Assign.Value>
+                                        <InArgument x:TypeArguments="x:String">[dt_Query_Result.Rows(0)("user_id").ToString.Trim]</InArgument>
+                                      </Assign.Value>
+                                    </Assign>
+                                    <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="262,62" sap2010:WorkflowViewState.IdRef="WriteLine_30" Text="Surveyor code available in email-Id" />
+                                  </Sequence>
+                                </If.Then>
+                                <If.Else>
+                                  <Sequence sap:VirtualizedContainerService.HintSize="304,354" sap2010:WorkflowViewState.IdRef="Sequence_40">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_17">
+                                      <Assign.To>
+                                        <OutArgument x:TypeArguments="x:Boolean">[Is_Broker_Captured]</OutArgument>
+                                      </Assign.To>
+                                      <Assign.Value>
+                                        <InArgument x:TypeArguments="x:Boolean">True</InArgument>
+                                      </Assign.Value>
+                                    </Assign>
+                                    <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_18">
+                                      <Assign.To>
+                                        <OutArgument x:TypeArguments="x:String">[in_Broker_Code]</OutArgument>
+                                      </Assign.To>
+                                      <Assign.Value>
+                                        <InArgument x:TypeArguments="x:String">[dt_Query_Result.Rows(0)("user_id").ToString.Trim]</InArgument>
+                                      </Assign.Value>
+                                    </Assign>
+                                    <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="262,62" sap2010:WorkflowViewState.IdRef="WriteLine_29" Text="Broker code available in email-Id" />
+                                  </Sequence>
+                                </If.Else>
+                              </If>
+                            </Sequence>
+                          </If.Then>
+                          <If.Else>
+                            <Sequence sap:VirtualizedContainerService.HintSize="200,84" sap2010:WorkflowViewState.IdRef="Sequence_34">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                            </Sequence>
+                          </If.Else>
+                        </If>
+                      </Sequence>
+                    </If.Then>
+                    <If.Else>
+                      <Sequence sap2010:WorkflowViewState.IdRef="Sequence_32">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                      </Sequence>
+                    </If.Else>
+                  </If>
+                  <ui:IfElseIf DisplayName="Else If" sap:VirtualizedContainerService.HintSize="809,5789" sap2010:WorkflowViewState.IdRef="IfElseIf_1">
+                    <ui:IfElseIf.ConditionBlocks>
+                      <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
+                        <ui:IfElseIfBlock BlockType="If" Condition="[Is_Survey_Captured]">
+                          <ui:IfElseIfBlock.Then>
+                            <Sequence DisplayName="Is_Survey_Captured" sap:VirtualizedContainerService.HintSize="617,1919" sap2010:WorkflowViewState.IdRef="Sequence_8">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="575,62" sap2010:WorkflowViewState.IdRef="WriteLine_8" Text="[&quot;Is_Survey_Captured : &quot;+Is_Survey_Captured.ToString]" />
+                              <ui:ExecuteQuery ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DataTable="[dt_Query_Result]" DisplayName="Run query" ExistingDbConnection="[DB_Conn]" sap:VirtualizedContainerService.HintSize="575,88" sap2010:WorkflowViewState.IdRef="ExecuteQuery_2" Sql="[&quot;SELECT * From surveyor Where SURVEYOR_CODE Like '%&quot;+in_Surveyor_Code+&quot;%';&quot;]">
+                                <ui:ExecuteQuery.Parameters>
+                                  <InArgument x:TypeArguments="x:String" x:Key="param_Surveyor_Code">[in_Surveyor_Code]</InArgument>
+                                </ui:ExecuteQuery.Parameters>
+                              </ui:ExecuteQuery>
+                              <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="575,62" sap2010:WorkflowViewState.IdRef="WriteLine_17" Text="[&quot;SELECT * From surveyor Where SURVEYOR_CODE Like '%&quot;+in_Surveyor_Code+&quot;%';&quot;]" />
+                              <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="575,62" sap2010:WorkflowViewState.IdRef="WriteLine_9" Text="[&quot;tbl-&gt;Survey - rows count : &quot;+dt_Query_Result.Rows.Count.ToString]" />
+                              <If Condition="[dt_Query_Result.Rows.Count&gt;0]" sap:VirtualizedContainerService.HintSize="575,1393" sap2010:WorkflowViewState.IdRef="If_1">
+                                <If.Then>
+                                  <Sequence sap:VirtualizedContainerService.HintSize="539,1224" sap2010:WorkflowViewState.IdRef="Sequence_6">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="497,131" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+                                      <ui:MultipleAssign.AssignOperations>
+                                        <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                                          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
+                                            <ui:AssignOperation.To>
+                                              <OutArgument x:TypeArguments="x:String">[userid_tbl]</OutArgument>
+                                            </ui:AssignOperation.To>
+                                            <ui:AssignOperation.Value>
+                                              <InArgument x:TypeArguments="x:String">[dt_Query_Result.Rows(0)("userid").ToString]</InArgument>
+                                            </ui:AssignOperation.Value>
+                                          </ui:AssignOperation>
+                                          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_2">
+                                            <ui:AssignOperation.To>
+                                              <OutArgument x:TypeArguments="x:String">[Expiry_Date_tbl]</OutArgument>
+                                            </ui:AssignOperation.To>
+                                            <ui:AssignOperation.Value>
+                                              <InArgument x:TypeArguments="x:String">[dt_Query_Result.Rows(0)("Expiry_Date").ToString]</InArgument>
+                                            </ui:AssignOperation.Value>
+                                          </ui:AssignOperation>
+                                        </scg:List>
+                                      </ui:MultipleAssign.AssignOperations>
+                                    </ui:MultipleAssign>
+                                    <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="497,62" sap2010:WorkflowViewState.IdRef="WriteLine_10" Text="[&quot;UserId :&quot;+userid_tbl+&quot;||Expiry_Date_tbl :&quot;+Expiry_Date_tbl.ToString]" />
+                                    <ui:ExecuteNonQuery ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" AffectedRecords="[Query_Result_Update]" CommandType="Text" DisplayName="Run command" ExistingDbConnection="[DB_Conn]" sap:VirtualizedContainerService.HintSize="497,88" sap2010:WorkflowViewState.IdRef="ExecuteNonQuery_1" Sql="[&quot;UPDATE surveyor SET expiry_date='&quot;+in_Expiry_Date+&quot;' WHERE SURVEYOR_CODE = '&quot;+in_Surveyor_Code+&quot;';&quot;]">
+                                      <ui:ExecuteNonQuery.Parameters>
+                                        <scg:Dictionary x:TypeArguments="x:String, Argument" />
+                                      </ui:ExecuteNonQuery.Parameters>
+                                    </ui:ExecuteNonQuery>
+                                    <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="497,62" sap2010:WorkflowViewState.IdRef="WriteLine_18" Text="[&quot;UPDATE surveyor SET expiry_date='&quot;+in_Expiry_Date+&quot;' WHERE SURVEYOR_CODE = '&quot;+in_Surveyor_Code+&quot;';&quot;]" />
+                                    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="497,245" sap2010:WorkflowViewState.IdRef="CommentOut_2">
+                                      <ui:CommentOut.Body>
+                                        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="376,167" sap2010:WorkflowViewState.IdRef="Sequence_4">
+                                          <sap:WorkflowViewStateService.ViewState>
+                                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                            </scg:Dictionary>
+                                          </sap:WorkflowViewStateService.ViewState>
+                                          <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:00:00" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="334,75" sap2010:WorkflowViewState.IdRef="MessageBox_2" Text="[&quot;Is_Survey_Captured Query status :&quot;+Query_Result_Update.ToString]" />
+                                        </Sequence>
+                                      </ui:CommentOut.Body>
+                                    </ui:CommentOut>
+                                    <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="497,62" sap2010:WorkflowViewState.IdRef="WriteLine_11" Text="[&quot;Is_Survey_Captured Query status :&quot;+Query_Result_Update.ToString]" />
+                                    <Switch x:TypeArguments="x:Int32" DisplayName="Switch" Expression="[Query_Result_Update]" sap:VirtualizedContainerService.HintSize="497,140" sap2010:WorkflowViewState.IdRef="Switch`1_1">
+                                      <Sequence x:Key="1" sap:VirtualizedContainerService.HintSize="304,250" sap2010:WorkflowViewState.IdRef="Sequence_5">
+                                        <sap:WorkflowViewStateService.ViewState>
+                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                          </scg:Dictionary>
+                                        </sap:WorkflowViewStateService.ViewState>
+                                        <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_1">
+                                          <Assign.To>
+                                            <OutArgument x:TypeArguments="x:Boolean">[Is_Expiry_Updated]</OutArgument>
+                                          </Assign.To>
+                                          <Assign.Value>
+                                            <InArgument x:TypeArguments="x:Boolean">True</InArgument>
+                                          </Assign.Value>
+                                        </Assign>
+                                        <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_2">
+                                          <Assign.To>
+                                            <OutArgument x:TypeArguments="x:String">[Mail_Body_Sent]</OutArgument>
+                                          </Assign.To>
+                                          <Assign.Value>
+                                            <InArgument x:TypeArguments="x:String" xml:space="preserve">["Hi OICL support team ,&lt;p&gt;As per the below mail request, License Expiry date was updated. Find the details on below.,,&lt;table border=1&gt;&lt;tr&gt;&lt;B&gt;&lt;td&gt;Suerveyor Code&lt;/td&gt;&lt;td&gt;Expiry Date[Updated]&lt;/td&gt;	&lt;td&gt;Expiry Date[Old]&lt;/td&gt;&lt;/B&gt;&lt;/tr&gt;&lt;tr&gt;	&lt;td&gt;"+in_Surveyor_Code.ToString+"&lt;/td&gt;	&lt;td&gt;"+in_Expiry_Date.ToString+"&lt;/td&gt;	&lt;td&gt;"+Expiry_Date_tbl.ToString+"&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;&lt;p&gt;&lt;B&gt;Regards,&lt;/B&gt;&lt;p&gt;Ui Path BOT"]</InArgument>
+                                          </Assign.Value>
+                                        </Assign>
+                                      </Sequence>
+                                    </Switch>
+                                    <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="497,62" sap2010:WorkflowViewState.IdRef="WriteLine_2" Text="[&quot;Is_Survey_Captured :&quot;+Is_Survey_Captured.ToString+&quot; || Surveyor_Code:&quot;+in_Surveyor_Code+&quot; || Expiry_Date :&quot;+in_Expiry_Date]" />
+                                  </Sequence>
+                                </If.Then>
+                                <If.Else>
+                                  <Sequence sap:VirtualizedContainerService.HintSize="200,84" sap2010:WorkflowViewState.IdRef="Sequence_7">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                  </Sequence>
+                                </If.Else>
+                              </If>
+                            </Sequence>
+                          </ui:IfElseIfBlock.Then>
+                        </ui:IfElseIfBlock>
+                        <ui:IfElseIfBlock BlockType="ElseIf" Condition="[Is_Broker_Captured]">
+                          <ui:IfElseIfBlock.Then>
+                            <Sequence DisplayName="Is_Broker_Captured" sap:VirtualizedContainerService.HintSize="617,1613" sap2010:WorkflowViewState.IdRef="Sequence_13">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="575,62" sap2010:WorkflowViewState.IdRef="WriteLine_13" Text="[&quot;Is_Broker_Captured : &quot;+Is_Broker_Captured.ToString]" />
+                              <ui:ExecuteQuery ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DataTable="[dt_Query_Result]" DisplayName="Run query" ExistingDbConnection="[DB_Conn]" sap:VirtualizedContainerService.HintSize="575,88" sap2010:WorkflowViewState.IdRef="ExecuteQuery_3" Sql="[&quot;Select * From portal_broker Where broker_code Like '%&quot;+in_Broker_Code+&quot;%'; &quot;]">
+                                <ui:ExecuteQuery.Parameters>
+                                  <InArgument x:TypeArguments="x:String" x:Key="param_Surveyor_Code">GH0000043238</InArgument>
+                                </ui:ExecuteQuery.Parameters>
+                              </ui:ExecuteQuery>
+                              <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="575,62" sap2010:WorkflowViewState.IdRef="WriteLine_15" Text="[&quot;tbl-&gt;portal_broker - rows count : &quot;+dt_Query_Result.Rows.Count.ToString]" />
+                              <If Condition="[dt_Query_Result.Rows.Count&gt;0]" sap:VirtualizedContainerService.HintSize="575,1189" sap2010:WorkflowViewState.IdRef="If_2">
+                                <If.Then>
+                                  <Sequence sap:VirtualizedContainerService.HintSize="539,1020" sap2010:WorkflowViewState.IdRef="Sequence_11">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="497,131" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
+                                      <ui:MultipleAssign.AssignOperations>
+                                        <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                                          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_3">
+                                            <ui:AssignOperation.To>
+                                              <OutArgument x:TypeArguments="x:String">[userid_tbl]</OutArgument>
+                                            </ui:AssignOperation.To>
+                                            <ui:AssignOperation.Value>
+                                              <InArgument x:TypeArguments="x:String">[dt_Query_Result.Rows(0)("userid").ToString]</InArgument>
+                                            </ui:AssignOperation.Value>
+                                          </ui:AssignOperation>
+                                          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_4">
+                                            <ui:AssignOperation.To>
+                                              <OutArgument x:TypeArguments="x:String">[Expiry_Date_tbl]</OutArgument>
+                                            </ui:AssignOperation.To>
+                                            <ui:AssignOperation.Value>
+                                              <InArgument x:TypeArguments="x:String">[dt_Query_Result.Rows(0)("IRDA_LICENSE_EXP_DATE").ToString]</InArgument>
+                                            </ui:AssignOperation.Value>
+                                          </ui:AssignOperation>
+                                        </scg:List>
+                                      </ui:MultipleAssign.AssignOperations>
+                                    </ui:MultipleAssign>
+                                    <ui:ExecuteNonQuery ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" AffectedRecords="[Query_Result_Update]" CommandType="Text" DisplayName="Run command" ExistingDbConnection="[DB_Conn]" sap:VirtualizedContainerService.HintSize="497,88" sap2010:WorkflowViewState.IdRef="ExecuteNonQuery_2" Sql="[&quot;UPDATE portal_broker SET IRDA_LICENSE_EXP_DATE='&quot;+in_Expiry_Date+&quot;' WHERE broker_code='&quot;+in_Broker_Code+&quot;' ;&quot;]">
+                                      <ui:ExecuteNonQuery.Parameters>
+                                        <scg:Dictionary x:TypeArguments="x:String, Argument" />
+                                      </ui:ExecuteNonQuery.Parameters>
+                                    </ui:ExecuteNonQuery>
+                                    <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="497,62" sap2010:WorkflowViewState.IdRef="WriteLine_16" Text="[&quot;Is_Broker_Captured Query status :&quot;+Query_Result_Update.ToString]" />
+                                    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="497,245" sap2010:WorkflowViewState.IdRef="CommentOut_3">
+                                      <ui:CommentOut.Body>
+                                        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="376,167" sap2010:WorkflowViewState.IdRef="Sequence_9">
+                                          <sap:WorkflowViewStateService.ViewState>
+                                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                            </scg:Dictionary>
+                                          </sap:WorkflowViewStateService.ViewState>
+                                          <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:00:00" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="334,75" sap2010:WorkflowViewState.IdRef="MessageBox_3" Text="[&quot;Is_Broker_Captured Query status :&quot;+Query_Result_Update.ToString]" />
+                                        </Sequence>
+                                      </ui:CommentOut.Body>
+                                    </ui:CommentOut>
+                                    <Switch x:TypeArguments="x:Int32" DisplayName="Switch" Expression="[Query_Result_Update]" sap:VirtualizedContainerService.HintSize="497,140" sap2010:WorkflowViewState.IdRef="Switch`1_2">
+                                      <Sequence x:Key="1" sap:VirtualizedContainerService.HintSize="304,250" sap2010:WorkflowViewState.IdRef="Sequence_10">
+                                        <sap:WorkflowViewStateService.ViewState>
+                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                          </scg:Dictionary>
+                                        </sap:WorkflowViewStateService.ViewState>
+                                        <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_3">
+                                          <Assign.To>
+                                            <OutArgument x:TypeArguments="x:Boolean">[Is_Expiry_Updated]</OutArgument>
+                                          </Assign.To>
+                                          <Assign.Value>
+                                            <InArgument x:TypeArguments="x:Boolean">True</InArgument>
+                                          </Assign.Value>
+                                        </Assign>
+                                        <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_4">
+                                          <Assign.To>
+                                            <OutArgument x:TypeArguments="x:String">[Mail_Body_Sent]</OutArgument>
+                                          </Assign.To>
+                                          <Assign.Value>
+                                            <InArgument x:TypeArguments="x:String" xml:space="preserve">["Hi OICL support team,&lt;p&gt;As per the below mail request, License Expiry date was updated. Find the details on below.,,&lt;table border=1&gt;&lt;tr&gt;&lt;B&gt;&lt;td&gt;Broker Code&lt;/td&gt;&lt;td&gt;Expiry Date[New]&lt;/td&gt;&lt;td&gt;Expiry Date[Old]&lt;/td&gt;&lt;/B&gt;&lt;/tr&gt;&lt;tr&gt;	&lt;td&gt;"+in_Broker_Code.ToString+"&lt;/td&gt;	&lt;td&gt;"+in_Expiry_Date.ToString+"&lt;/td&gt;	&lt;td&gt;"+Expiry_Date_tbl.ToString+"&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;&lt;p&gt;&lt;B&gt;Regards,&lt;/B&gt;&lt;p&gt;Ui Path BOT"]</InArgument>
+                                          </Assign.Value>
+                                        </Assign>
+                                      </Sequence>
+                                    </Switch>
+                                    <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="497,62" sap2010:WorkflowViewState.IdRef="WriteLine_3" Text="[&quot;Is_Broker_Captured :&quot;+Is_Broker_Captured.ToString+&quot; || Surveyor_Code:&quot;+in_Surveyor_Code+&quot; || Expiry_Date :&quot;+in_Expiry_Date]" />
+                                  </Sequence>
+                                </If.Then>
+                                <If.Else>
+                                  <Sequence sap2010:WorkflowViewState.IdRef="Sequence_12">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                  </Sequence>
+                                </If.Else>
+                              </If>
+                            </Sequence>
+                          </ui:IfElseIfBlock.Then>
+                        </ui:IfElseIfBlock>
+                        <ui:IfElseIfBlock BlockType="ElseIf" Condition="[Is_Email_Captured]">
+                          <ui:IfElseIfBlock.Then>
+                            <Sequence DisplayName="Is_Email_Captured" sap:VirtualizedContainerService.HintSize="617,1817" sap2010:WorkflowViewState.IdRef="Sequence_28">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <ui:ExecuteQuery ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DataTable="[dt_Query_Result]" DisplayName="Run query" ExistingDbConnection="[DB_Conn]" sap:VirtualizedContainerService.HintSize="575,88" sap2010:WorkflowViewState.IdRef="ExecuteQuery_5" Sql="[&quot;SELECT * From surveyor Where SURVEYOR_CODE Like '%&quot;+in_Surveyor_Code+&quot;%';&quot;]">
+                                <ui:ExecuteQuery.Parameters>
+                                  <InArgument x:TypeArguments="x:String" x:Key="param_Surveyor_Code">[in_Surveyor_Code]</InArgument>
+                                </ui:ExecuteQuery.Parameters>
+                              </ui:ExecuteQuery>
+                              <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="575,62" sap2010:WorkflowViewState.IdRef="WriteLine_20" Text="[&quot;SELECT * From surveyor Where SURVEYOR_CODE Like '%&quot;+in_Surveyor_Code+&quot;%';&quot;]" />
+                              <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="575,62" sap2010:WorkflowViewState.IdRef="WriteLine_21" Text="[&quot;tbl-&gt;Survey - rows count : &quot;+dt_Query_Result.Rows.Count.ToString]" />
+                              <If Condition="[dt_Query_Result.Rows.Count&gt;0]" sap:VirtualizedContainerService.HintSize="575,1393" sap2010:WorkflowViewState.IdRef="If_5">
+                                <If.Then>
+                                  <Sequence sap:VirtualizedContainerService.HintSize="539,1224" sap2010:WorkflowViewState.IdRef="Sequence_26">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="497,131" sap2010:WorkflowViewState.IdRef="MultipleAssign_4">
+                                      <ui:MultipleAssign.AssignOperations>
+                                        <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                                          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_7">
+                                            <ui:AssignOperation.To>
+                                              <OutArgument x:TypeArguments="x:String">[userid_tbl]</OutArgument>
+                                            </ui:AssignOperation.To>
+                                            <ui:AssignOperation.Value>
+                                              <InArgument x:TypeArguments="x:String">[dt_Query_Result.Rows(0)("userid").ToString]</InArgument>
+                                            </ui:AssignOperation.Value>
+                                          </ui:AssignOperation>
+                                          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_8">
+                                            <ui:AssignOperation.To>
+                                              <OutArgument x:TypeArguments="x:String">[Expiry_Date_tbl]</OutArgument>
+                                            </ui:AssignOperation.To>
+                                            <ui:AssignOperation.Value>
+                                              <InArgument x:TypeArguments="x:String">[dt_Query_Result.Rows(0)("Expiry_Date").ToString]</InArgument>
+                                            </ui:AssignOperation.Value>
+                                          </ui:AssignOperation>
+                                        </scg:List>
+                                      </ui:MultipleAssign.AssignOperations>
+                                    </ui:MultipleAssign>
+                                    <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="497,62" sap2010:WorkflowViewState.IdRef="WriteLine_22" Text="[&quot;UserId :&quot;+userid_tbl+&quot;||Expiry_Date_tbl :&quot;+Expiry_Date_tbl.ToString]" />
+                                    <ui:ExecuteNonQuery ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" AffectedRecords="[Query_Result_Update]" CommandType="Text" DisplayName="Run command" ExistingDbConnection="[DB_Conn]" sap:VirtualizedContainerService.HintSize="497,88" sap2010:WorkflowViewState.IdRef="ExecuteNonQuery_4" Sql="[&quot;UPDATE surveyor SET expiry_date='&quot;+in_Expiry_Date+&quot;' WHERE SURVEYOR_CODE = '&quot;+in_Surveyor_Code+&quot;';&quot;]">
+                                      <ui:ExecuteNonQuery.Parameters>
+                                        <scg:Dictionary x:TypeArguments="x:String, Argument" />
+                                      </ui:ExecuteNonQuery.Parameters>
+                                    </ui:ExecuteNonQuery>
+                                    <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="497,62" sap2010:WorkflowViewState.IdRef="WriteLine_23" Text="[&quot;UPDATE surveyor SET expiry_date='&quot;+in_Expiry_Date+&quot;' WHERE SURVEYOR_CODE = '&quot;+in_Surveyor_Code+&quot;';&quot;]" />
+                                    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="497,245" sap2010:WorkflowViewState.IdRef="CommentOut_6">
+                                      <ui:CommentOut.Body>
+                                        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="376,167" sap2010:WorkflowViewState.IdRef="Sequence_24">
+                                          <sap:WorkflowViewStateService.ViewState>
+                                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                            </scg:Dictionary>
+                                          </sap:WorkflowViewStateService.ViewState>
+                                          <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:00:00" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="334,75" sap2010:WorkflowViewState.IdRef="MessageBox_6" Text="[&quot;Is_Survey_Captured Query status :&quot;+Query_Result_Update.ToString]" />
+                                        </Sequence>
+                                      </ui:CommentOut.Body>
+                                    </ui:CommentOut>
+                                    <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="497,62" sap2010:WorkflowViewState.IdRef="WriteLine_24" Text="[&quot;Is_Survey_Captured Query status :&quot;+Query_Result_Update.ToString]" />
+                                    <Switch x:TypeArguments="x:Int32" DisplayName="Switch" Expression="[Query_Result_Update]" sap:VirtualizedContainerService.HintSize="497,140" sap2010:WorkflowViewState.IdRef="Switch`1_4">
+                                      <Sequence x:Key="1" sap:VirtualizedContainerService.HintSize="304,252" sap2010:WorkflowViewState.IdRef="Sequence_25">
+                                        <sap:WorkflowViewStateService.ViewState>
+                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                          </scg:Dictionary>
+                                        </sap:WorkflowViewStateService.ViewState>
+                                        <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_7">
+                                          <Assign.To>
+                                            <OutArgument x:TypeArguments="x:Boolean">[Is_Expiry_Updated]</OutArgument>
+                                          </Assign.To>
+                                          <Assign.Value>
+                                            <InArgument x:TypeArguments="x:Boolean">True</InArgument>
+                                          </Assign.Value>
+                                        </Assign>
+                                        <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_8">
+                                          <Assign.To>
+                                            <OutArgument x:TypeArguments="x:String">[Mail_Body_Sent]</OutArgument>
+                                          </Assign.To>
+                                          <Assign.Value>
+                                            <InArgument x:TypeArguments="x:String" xml:space="preserve">["Hi OICL support team ,&lt;p&gt;As per the below mail request, License Expiry date was updated. Find the details on below.,,&lt;table border=1&gt;&lt;tr&gt;&lt;B&gt;&lt;td&gt;Suerveyor Code&lt;/td&gt;&lt;td&gt;Expiry Date[New]&lt;/td&gt;	&lt;td&gt;Expiry Date[Before Update]&lt;/td&gt;&lt;/B&gt;&lt;/tr&gt;&lt;tr&gt;	&lt;td&gt;"+in_Surveyor_Code.ToString+"&lt;/td&gt;	&lt;td&gt;"+in_Expiry_Date.ToString+"&lt;/td&gt;	&lt;td&gt;"+Expiry_Date_tbl.ToString+"&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;&lt;p&gt;&lt;B&gt;Regards,&lt;/B&gt;&lt;p&gt;Ui Path BOT"]</InArgument>
+                                          </Assign.Value>
+                                        </Assign>
+                                      </Sequence>
+                                    </Switch>
+                                    <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="497,62" sap2010:WorkflowViewState.IdRef="WriteLine_25" Text="[&quot;Is_Survey_Captured :&quot;+Is_Survey_Captured.ToString+&quot; || Surveyor_Code:&quot;+in_Surveyor_Code+&quot; || Expiry_Date :&quot;+in_Expiry_Date]" />
+                                  </Sequence>
+                                </If.Then>
+                                <If.Else>
+                                  <Sequence sap:VirtualizedContainerService.HintSize="200,84" sap2010:WorkflowViewState.IdRef="Sequence_27">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                  </Sequence>
+                                </If.Else>
+                              </If>
+                            </Sequence>
+                          </ui:IfElseIfBlock.Then>
+                        </ui:IfElseIfBlock>
+                      </sc:BindingList>
+                    </ui:IfElseIf.ConditionBlocks>
+                  </ui:IfElseIf>
+                  <ui:DatabaseDisconnect DatabaseConnection="[DB_Conn]" DisplayName="Disconnect from database" sap:VirtualizedContainerService.HintSize="809,22" sap2010:WorkflowViewState.IdRef="DatabaseDisconnect_1" />
+                  <If Condition="[Is_Expiry_Updated =False]" sap:VirtualizedContainerService.HintSize="809,342" sap2010:WorkflowViewState.IdRef="If_3">
+                    <If.Then>
+                      <Sequence sap:VirtualizedContainerService.HintSize="304,152" sap2010:WorkflowViewState.IdRef="Sequence_17">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_6">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:String">[Mail_Body_Sent]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:String" xml:space="preserve">["Hi OICL Support team,&lt;p&gt;Unable to update the expiry date. Kindly check the shared details. Find the details on below.,,&lt;table border=1&gt;&lt;tr&gt;&lt;B&gt;&lt;td&gt;Broker Code&lt;/td&gt;&lt;td&gt;Expiry Date[in Table]&lt;/td&gt;&lt;td&gt;Expiry Date[Requested for Update]&lt;/td&gt;&lt;/B&gt;&lt;/tr&gt;&lt;tr&gt;	&lt;td&gt;"+in_Broker_Code.ToString+"&lt;/td&gt;	&lt;td&gt;"+Expiry_Date_tbl.ToString+"&lt;/td&gt;	&lt;td&gt;"+in_Expiry_Date.ToString+"&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;&lt;p&gt;&lt;B&gt;Regards,&lt;/B&gt;&lt;p&gt;Ui Path BOT"]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                      </Sequence>
+                    </If.Then>
+                    <If.Else>
+                      <Sequence sap:VirtualizedContainerService.HintSize="200,84" sap2010:WorkflowViewState.IdRef="Sequence_18">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                      </Sequence>
+                    </If.Else>
+                  </If>
+                  <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="809,62" sap2010:WorkflowViewState.IdRef="WriteLine_4" Text="[&quot;Is_Expiry_Updated :&quot;+Is_Expiry_Updated.ToString]" />
+                  <ui:ReplyToOutlookMailMessage AddBcc="{x:Null}" AddCc="{x:Null}" AddTo="{x:Null}" NewSubject="{x:Null}" ReplyFrom="{x:Null}" TimeoutMS="{x:Null}" Body="[Mail_Body_Sent]" DisplayName="Reply To Outlook Mail Message" sap:VirtualizedContainerService.HintSize="809,120" sap2010:WorkflowViewState.IdRef="ReplyToOutlookMailMessage_1" Importance="Normal" MailMessage="[in_Received_Mail]" ReplyAll="False">
+                    <ui:ReplyToOutlookMailMessage.Files>
+                      <scg:List x:TypeArguments="InArgument(x:String)" Capacity="0" />
+                    </ui:ReplyToOutlookMailMessage.Files>
+                  </ui:ReplyToOutlookMailMessage>
+                  <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="809,62" sap2010:WorkflowViewState.IdRef="WriteLine_7" Text="mySQL - License Expiry update was Completed..." />
+                  <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="809,255" sap2010:WorkflowViewState.IdRef="CommentOut_5">
+                    <ui:CommentOut.Body>
+                      <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="376,177" sap2010:WorkflowViewState.IdRef="Sequence_19">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:00:00" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="334,85" sap2010:WorkflowViewState.IdRef="MessageBox_5" Text="[&quot;Completed&quot;]" />
+                      </Sequence>
+                    </ui:CommentOut.Body>
+                  </ui:CommentOut>
+                </Sequence>
+              </Sequence>
+            </If.Then>
+            <If.Else>
+              <Sequence sap2010:WorkflowViewState.IdRef="Sequence_22">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </Sequence>
+            </If.Else>
+          </If>
+        </Sequence>
+      </TryCatch.Try>
+      <TryCatch.Catches>
+        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="1055,21" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ActivityAction x:TypeArguments="s:Exception">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+            </ActivityAction.Argument>
+            <Sequence sap:VirtualizedContainerService.HintSize="400,453" sap2010:WorkflowViewState.IdRef="Sequence_42">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="338,71" sap2010:WorkflowViewState.IdRef="WriteLine_32" Text="[&quot;Failed to update... :&quot;+exception.Message.ToString]" />
+              <Assign sap:VirtualizedContainerService.HintSize="338,60" sap2010:WorkflowViewState.IdRef="Assign_20">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[Mail_Body_Sent]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String">Hi OICL Support team,&lt;p&gt;Unable to update the expiry date due to Database connectivity issue..&lt;p&gt;&lt;p&gt;&lt;B&gt;Regards,&lt;/B&gt;&lt;p&gt;Ui Path BOT</InArgument>
+                </Assign.Value>
+              </Assign>
+              <ui:ReplyToOutlookMailMessage AddBcc="{x:Null}" AddCc="{x:Null}" AddTo="{x:Null}" NewSubject="{x:Null}" ReplyFrom="{x:Null}" TimeoutMS="{x:Null}" Body="[Mail_Body_Sent]" DisplayName="Reply To Outlook Mail Message" sap:VirtualizedContainerService.HintSize="338,120" sap2010:WorkflowViewState.IdRef="ReplyToOutlookMailMessage_2" Importance="Normal" MailMessage="[in_Received_Mail]" ReplyAll="False">
+                <ui:ReplyToOutlookMailMessage.Files>
+                  <scg:List x:TypeArguments="InArgument(x:String)" Capacity="0" />
+                </ui:ReplyToOutlookMailMessage.Files>
+              </ui:ReplyToOutlookMailMessage>
+            </Sequence>
+          </ActivityAction>
+        </Catch>
+      </TryCatch.Catches>
+    </TryCatch>
+  </Sequence>
+</Activity>

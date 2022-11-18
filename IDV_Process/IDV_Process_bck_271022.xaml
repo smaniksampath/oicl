@@ -1,0 +1,400 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="IDV_Process" this:IDV_Process.In_StateToCity_Master_Excel="D:\OICL\workspace\Manik\OICL\26-10-2022\Input\state_to_city.xlsx" this:IDV_Process.In_SheetName_StateToCity_Master_Excel="Sheet1" this:IDV_Process.In_DB_ConnectionString="Dsn=OICL;uid=oicl_user;pwd=oicl_user;Database=oicl_dev3" this:IDV_Process.In_DB_Name="oicl_dev3" this:IDV_Process.In_Master_IDVqueries_Excel="D:\OICL\workspace\Manik\OICL\OICL_Master\IDV_Queries.xlsx" this:IDV_Process.In_Master_IDVqueries_Excel_SheetName="[{&quot;MOT-PRD-001&quot;,&quot;MOT-PRD-002&quot;,&quot;MOT-PRD-003&quot;,&quot;MOT-PRD-004&quot;,&quot;MOT-PRD-005&quot;}]" this:IDV_Process.In_Mail_Attachment_DownloadFolder="D:\OICL\workspace\Manik\OICL\Input\01062022-180640" this:IDV_Process.In_ExcelSheetName_IDV="IDV'S" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:snm="clr-namespace:System.Net.Mail;assembly=System" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="In_StateToCity_Master_Excel" Type="InArgument(x:String)" />
+    <x:Property Name="In_SheetName_StateToCity_Master_Excel" Type="InArgument(x:String)" />
+    <x:Property Name="In_DB_ConnectionString" Type="InArgument(x:String)" />
+    <x:Property Name="In_DB_Name" Type="InArgument(x:String)" />
+    <x:Property Name="In_Master_IDVqueries_Excel" Type="InArgument(x:String)" />
+    <x:Property Name="In_Master_IDVqueries_Excel_SheetName" Type="InArgument(s:String[])" />
+    <x:Property Name="In_Mail_Attachment_DownloadFolder" Type="InArgument(x:String)" />
+    <x:Property Name="In_Mail_Attachment_DownloadFolder_WithFile" Type="InArgument(x:String)" />
+    <x:Property Name="In_ExcelSheetName_IDV" Type="InArgument(x:String)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>1143,3830</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>IDV_Process_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Runtime.InteropServices</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>System.Activities.DynamicUpdate</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>NPOI</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Plugin.Workflow</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="IDV_Process" sap:VirtualizedContainerService.HintSize="1153,3765" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="sd:DataSet" Name="ds_QueryList" />
+      <Variable x:TypeArguments="scg:List(x:String)" Name="L_Queries_AllSheetName" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_IDV_VehicleDetails" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_IDV_VehicleDetails_With_City" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_StateToCity" />
+      <Variable x:TypeArguments="x:String" Name="FileName_WithoutExtension" />
+      <Variable x:TypeArguments="x:Boolean" Name="b_Exception" />
+      <Variable x:TypeArguments="x:String" Name="Exception_msg" />
+      <Variable x:TypeArguments="x:String" Name="ProductCode" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_Query_List" />
+      <Variable x:TypeArguments="x:Boolean" Name="b_IsQueryList" />
+      <Variable x:TypeArguments="x:String" Name="Query" />
+      <Variable x:TypeArguments="x:String" Name="StepName" />
+      <Variable x:TypeArguments="x:Boolean" Default="True" Name="b_IsSuccess" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_IDV_VehicleDetails_With_OnlyCity_ReqCol" />
+      <Variable x:TypeArguments="x:Boolean" Name="b_IsInputFileAvailable" />
+      <Variable x:TypeArguments="x:Boolean" Default="False" Name="b_IsSuccess_GetCity" />
+      <Variable x:TypeArguments="x:String" Name="Mail_Body_Sent" />
+      <Variable x:TypeArguments="snm:MailMessage" sap2010:Annotation.AnnotationText="Type 'x:MailMessage' ('http://schemas.microsoft.com/winfx/2006/xaml') could not be resolved and was automatically replaced with 'UnknownType'" Name="Mail_Reply_ID" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="1091,3643" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+      <TryCatch.Try>
+        <Sequence sap:VirtualizedContainerService.HintSize="1053,3401" sap2010:WorkflowViewState.IdRef="Sequence_19">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="IDV_ReadExcel.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="991,123" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="IDV_Process\IDV_ReadExcel.xaml">
+            <ui:InvokeWorkflowFile.Arguments>
+              <InArgument x:TypeArguments="x:String" x:Key="In_StateToCity_Master_Excel">[In_StateToCity_Master_Excel]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="In_SheetName_StateToCity_Master_Excel">[In_SheetName_StateToCity_Master_Excel]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="In_DB_ConnectionString">[In_DB_ConnectionString]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="In_DB_Name">[In_DB_Name]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="In_Master_IDVqueries_Excel">[In_Master_IDVqueries_Excel]</InArgument>
+              <InArgument x:TypeArguments="s:String[]" x:Key="In_Master_IDVqueries_Excel_SheetName">[In_Master_IDVqueries_Excel_SheetName]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="In_Mail_Attachment_DownloadFolder">[In_Mail_Attachment_DownloadFolder]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="In_Mail_Attachment_DownloadFolder_WithFile">[In_Mail_Attachment_DownloadFolder_WithFile]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="In_ExcelSheetName_IDV">[In_ExcelSheetName_IDV]</InArgument>
+              <OutArgument x:TypeArguments="sd:DataSet" x:Key="Out_ds_QueryList">[ds_QueryList]</OutArgument>
+              <OutArgument x:TypeArguments="scg:List(x:String)" x:Key="Out_L_Queries_AllSheetName">[L_Queries_AllSheetName]</OutArgument>
+              <OutArgument x:TypeArguments="sd:DataTable" x:Key="Out_dt_IDV_VehicleDetails">[dt_IDV_VehicleDetails]</OutArgument>
+              <OutArgument x:TypeArguments="sd:DataTable" x:Key="Out_dt_IDV_VehicleDetails_With_City">[dt_IDV_VehicleDetails_With_City]</OutArgument>
+              <OutArgument x:TypeArguments="sd:DataTable" x:Key="Out_dt_StateToCity">[dt_StateToCity]</OutArgument>
+              <OutArgument x:TypeArguments="x:String" x:Key="Out_FileName_WithoutExtension">[FileName_WithoutExtension]</OutArgument>
+              <OutArgument x:TypeArguments="x:Boolean" x:Key="out_b_IsInputFileAvailable">[b_IsInputFileAvailable]</OutArgument>
+            </ui:InvokeWorkflowFile.Arguments>
+          </ui:InvokeWorkflowFile>
+          <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="991,72" sap2010:WorkflowViewState.IdRef="WriteLine_7" Text="[&quot;Input File available -&gt; &quot;+b_IsInputFileAvailable.ToString]" />
+          <If Condition="[b_IsInputFileAvailable]" sap:VirtualizedContainerService.HintSize="991,963" sap2010:WorkflowViewState.IdRef="If_4">
+            <If.Then>
+              <Sequence sap:VirtualizedContainerService.HintSize="546,793" sap2010:WorkflowViewState.IdRef="Sequence_18">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <If Condition="[ds_QueryList.Tables.Count&gt;0 And&#xA;dt_IDV_VehicleDetails.rows.Count&gt;0]" sap:VirtualizedContainerService.HintSize="484,671" sap2010:WorkflowViewState.IdRef="If_1">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <If.Then>
+                    <Sequence sap:VirtualizedContainerService.HintSize="400,467" sap2010:WorkflowViewState.IdRef="Sequence_6">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="338,72" sap2010:WorkflowViewState.IdRef="WriteLine_1" Text="File available :: Query File &amp; Input file available for process.." />
+                      <Assign sap:VirtualizedContainerService.HintSize="338,70" sap2010:WorkflowViewState.IdRef="Assign_2">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:String">[ProductCode]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:String">[dt_IDV_VehicleDetails_With_City.Rows(1)("PRODUCT CODE").ToString]</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="IDV_GetCity.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="338,123" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_10" UnSafe="False" WorkflowFileName="IDV_Process\IDV_GetCity.xaml">
+                        <ui:InvokeWorkflowFile.Arguments>
+                          <InArgument x:TypeArguments="x:String" x:Key="In_DB_ConnectionString">[In_DB_ConnectionString]</InArgument>
+                          <InArgument x:TypeArguments="x:String" x:Key="In_DB_Name">[In_DB_Name]</InArgument>
+                          <InArgument x:TypeArguments="x:String" x:Key="In_Master_IDVqueries_Excel">[In_Master_IDVqueries_Excel]</InArgument>
+                          <InArgument x:TypeArguments="sd:DataSet" x:Key="In_ds_QueryList">[ds_QueryList]</InArgument>
+                          <InArgument x:TypeArguments="scg:List(x:String)" x:Key="In_L_Queries_AllSheetName">[L_Queries_AllSheetName]</InArgument>
+                          <InArgument x:TypeArguments="x:String" x:Key="In_Mail_Attachment_DownloadFolder">[In_Mail_Attachment_DownloadFolder]</InArgument>
+                          <InArgument x:TypeArguments="x:String" x:Key="In_Mail_Attachment_DownloadFolder_WithFile">[In_Mail_Attachment_DownloadFolder_WithFile]</InArgument>
+                          <InArgument x:TypeArguments="x:String" x:Key="In_ExcelSheetName_IDV">[In_ExcelSheetName_IDV]</InArgument>
+                          <InArgument x:TypeArguments="x:String" x:Key="In_StateToCity_Master_Excel">[In_StateToCity_Master_Excel]</InArgument>
+                          <InArgument x:TypeArguments="x:String" x:Key="In_SheetName_StateToCity_Master_Excel">[In_SheetName_StateToCity_Master_Excel]</InArgument>
+                          <InArgument x:TypeArguments="sd:DataTable" x:Key="In_dt_IDV_VehicleDetails">[dt_IDV_VehicleDetails]</InArgument>
+                          <InArgument x:TypeArguments="sd:DataTable" x:Key="In_dt_IDV_VehicleDetails_With_City">[dt_IDV_VehicleDetails_With_City]</InArgument>
+                          <InArgument x:TypeArguments="sd:DataTable" x:Key="In_dt_StateToCity">[dt_StateToCity]</InArgument>
+                          <InArgument x:TypeArguments="x:String" x:Key="In_FileName_WithoutExtension">[FileName_WithoutExtension]</InArgument>
+                          <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_dt_IDV_VehicleDetails_With_OnlyCity_ReqCol">[dt_IDV_VehicleDetails_With_OnlyCity_ReqCol]</OutArgument>
+                          <OutArgument x:TypeArguments="x:Boolean" x:Key="out_b_IsSuccess_GetCity">[b_IsSuccess_GetCity]</OutArgument>
+                          <InOutArgument x:TypeArguments="x:String" x:Key="out_ProductCode">[ProductCode]</InOutArgument>
+                        </ui:InvokeWorkflowFile.Arguments>
+                      </ui:InvokeWorkflowFile>
+                    </Sequence>
+                  </If.Then>
+                  <If.Else>
+                    <Sequence sap2010:WorkflowViewState.IdRef="Sequence_3">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                    </Sequence>
+                  </If.Else>
+                </If>
+              </Sequence>
+            </If.Then>
+            <If.Else>
+              <Sequence sap:VirtualizedContainerService.HintSize="400,194" sap2010:WorkflowViewState.IdRef="Sequence_13">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="338,72" sap2010:WorkflowViewState.IdRef="WriteLine_2" Text="No input file available for process" />
+              </Sequence>
+            </If.Else>
+          </If>
+          <If Condition="[b_IsSuccess_GetCity]" sap:VirtualizedContainerService.HintSize="991,445" sap2010:WorkflowViewState.IdRef="If_8">
+            <If.Then>
+              <Sequence sap:VirtualizedContainerService.HintSize="400,245" sap2010:WorkflowViewState.IdRef="Sequence_20">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="IDV_GetQueryList.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="338,123" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_11" UnSafe="False" WorkflowFileName="IDV_Process\IDV_GetQueryList.xaml">
+                  <ui:InvokeWorkflowFile.Arguments>
+                    <OutArgument x:TypeArguments="sd:DataTable" x:Key="Out_dt_QueryList">[dt_Query_List]</OutArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="In_QueryExcel_SheetName">[ProductCode]</InArgument>
+                    <InArgument x:TypeArguments="sd:DataSet" x:Key="In_ds_QueryList">[ds_QueryList]</InArgument>
+                    <OutArgument x:TypeArguments="x:Boolean" x:Key="out_b_IsQueryList">[b_IsQueryList]</OutArgument>
+                  </ui:InvokeWorkflowFile.Arguments>
+                </ui:InvokeWorkflowFile>
+              </Sequence>
+            </If.Then>
+            <If.Else>
+              <Sequence sap2010:WorkflowViewState.IdRef="Sequence_21">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </Sequence>
+            </If.Else>
+          </If>
+          <If Condition="[b_IsQueryList]" sap:VirtualizedContainerService.HintSize="991,445" sap2010:WorkflowViewState.IdRef="If_9">
+            <If.Then>
+              <Sequence sap:VirtualizedContainerService.HintSize="406,245" sap2010:WorkflowViewState.IdRef="Sequence_22">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="IDV_QueryExecution_dt.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="344,123" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_7" UnSafe="False" WorkflowFileName="IDV_Process\IDV_QueryExecution_dt.xaml">
+                  <ui:InvokeWorkflowFile.Arguments>
+                    <InArgument x:TypeArguments="x:String" x:Key="In_Mail_Attachment_DownloadFolder">[In_Mail_Attachment_DownloadFolder]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="In_Mail_Attachment_DownloadFolder_WithFile">[In_Mail_Attachment_DownloadFolder_WithFile]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="In_ExcelSheetName_IDV">[In_ExcelSheetName_IDV]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="In_SheetName_StateToCity_Master_Excel">[In_SheetName_StateToCity_Master_Excel]</InArgument>
+                    <InArgument x:TypeArguments="sd:DataTable" x:Key="In_dt_IDV_VehicleDetails">[dt_IDV_VehicleDetails]</InArgument>
+                    <InArgument x:TypeArguments="sd:DataTable" x:Key="In_dt_IDV_VehicleDetails_With_City">[dt_IDV_VehicleDetails_With_City]</InArgument>
+                    <InArgument x:TypeArguments="sd:DataTable" x:Key="In_dt_StateToCity">[dt_StateToCity]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="In_FileName_WithoutExtension">[FileName_WithoutExtension]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="In_Excel_GeneratedFileWithCity_IDV">[In_Mail_Attachment_DownloadFolder_WithFile]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="In_DB_ConnectionString">[In_DB_ConnectionString]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="In_DB_Name">[In_DB_Name]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="In_Master_IDVqueries_Excel">[In_Master_IDVqueries_Excel]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="In_StateToCity_Master_Excel">[In_StateToCity_Master_Excel]</InArgument>
+                    <InArgument x:TypeArguments="sd:DataSet" x:Key="In_ds_QueryList">[ds_QueryList]</InArgument>
+                    <InArgument x:TypeArguments="scg:List(x:String)" x:Key="In_L_Queries_AllSheetName">[L_Queries_AllSheetName]</InArgument>
+                    <InArgument x:TypeArguments="sd:DataTable" x:Key="In_dt_IDV_VehicleDetails_With_OnlyCity_ReqCol">[dt_IDV_VehicleDetails_With_OnlyCity_ReqCol]</InArgument>
+                    <InArgument x:TypeArguments="sd:DataTable" x:Key="In_dt_Query_List">[dt_Query_List]</InArgument>
+                    <OutArgument x:TypeArguments="x:Boolean" x:Key="Out_b_IsQuerySuccess">[b_IsSuccess]</OutArgument>
+                    <OutArgument x:TypeArguments="x:String" x:Key="Out_StepName">[StepName]</OutArgument>
+                    <OutArgument x:TypeArguments="x:String" x:Key="Out_Query">[Query]</OutArgument>
+                    <OutArgument x:TypeArguments="x:String" x:Key="Out_Exception_msg">[Exception_msg]</OutArgument>
+                  </ui:InvokeWorkflowFile.Arguments>
+                </ui:InvokeWorkflowFile>
+              </Sequence>
+            </If.Then>
+            <If.Else>
+              <Sequence sap2010:WorkflowViewState.IdRef="Sequence_23">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </Sequence>
+            </If.Else>
+          </If>
+          <If Condition="[b_IsSuccess]" sap:VirtualizedContainerService.HintSize="991,588" sap2010:WorkflowViewState.IdRef="If_10">
+            <If.Then>
+              <Sequence sap:VirtualizedContainerService.HintSize="400,194" sap2010:WorkflowViewState.IdRef="Sequence_24">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="338,72" sap2010:WorkflowViewState.IdRef="WriteLine_8" Text="Success :: Execution completed Successfully.." />
+              </Sequence>
+            </If.Then>
+            <If.Else>
+              <Sequence sap:VirtualizedContainerService.HintSize="400,418" sap2010:WorkflowViewState.IdRef="Sequence_25">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="338,72" sap2010:WorkflowViewState.IdRef="WriteLine_9" Text="Failure :: Unable to Execute.." />
+                <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="338,72" sap2010:WorkflowViewState.IdRef="WriteLine_10" Text="[&quot; StepName : &quot;+StepName+&quot; || &quot;+Query]" />
+                <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="338,72" sap2010:WorkflowViewState.IdRef="WriteLine_11" Text="[&quot;Exception : &quot; +Exception_msg]" />
+              </Sequence>
+            </If.Else>
+          </If>
+          <If Condition="[string.IsNullOrEmpty(Exception_msg)]" sap:VirtualizedContainerService.HintSize="991,240" sap2010:WorkflowViewState.IdRef="If_11">
+            <If.Then>
+              <Assign sap:VirtualizedContainerService.HintSize="262,70" sap2010:WorkflowViewState.IdRef="Assign_6">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[Mail_Body_Sent]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String" xml:space="preserve">["Hi OICL Support team,&lt;p&gt;Unable to process the IDV. Find the details on below.,,&lt;table border=1&gt;&lt;tr&gt;&lt;B&gt;&lt;td&gt;Error Details&lt;/td&gt;	&lt;td&gt;"+Exception_msg+"&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;&lt;p&gt;&lt;B&gt;Regards,&lt;/B&gt;&lt;p&gt;Digital Helpdesk RPA"]</InArgument>
+                </Assign.Value>
+              </Assign>
+            </If.Then>
+            <If.Else>
+              <Assign sap:VirtualizedContainerService.HintSize="262,70" sap2010:WorkflowViewState.IdRef="Assign_7">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[Mail_Body_Sent]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String" xml:space="preserve">["Hi OICL Support team,&lt;p&gt;Unable to process the IDV. Find the details on below.,,&lt;table border=1&gt;&lt;tr&gt;&lt;B&gt;&lt;td&gt;Error Details&lt;/td&gt;	&lt;td&gt;"+Exception_msg+"&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;&lt;p&gt;&lt;B&gt;Regards,&lt;/B&gt;&lt;p&gt;Digital Helpdesk RPA"]</InArgument>
+                </Assign.Value>
+              </Assign>
+            </If.Else>
+          </If>
+          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="SentMail_Outlook.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="991,123" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_8" UnSafe="False" WorkflowFileName="Mail\SentMail_Outlook.xaml">
+            <ui:InvokeWorkflowFile.Arguments>
+              <InArgument x:TypeArguments="snm:MailMessage" x:Key="in_Mail_Reply_ID">[Mail_Reply_ID]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_Mail_Body_Sent">[Mail_Body_Sent]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_Mail_Subject_Inbox">[Mail_Body_Sent]</InArgument>
+              <OutArgument x:TypeArguments="x:String" x:Key="Out_ExceptionMsg">[Exception_msg]</OutArgument>
+              <OutArgument x:TypeArguments="x:Boolean" x:Key="out_b_IsSuccess">[b_IsSuccess]</OutArgument>
+            </ui:InvokeWorkflowFile.Arguments>
+          </ui:InvokeWorkflowFile>
+        </Sequence>
+      </TryCatch.Try>
+      <TryCatch.Catches>
+        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="1057,22" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ActivityAction x:TypeArguments="s:Exception">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="s:Exception" Name="ex" />
+            </ActivityAction.Argument>
+            <Sequence sap:VirtualizedContainerService.HintSize="631,525" sap2010:WorkflowViewState.IdRef="Sequence_26">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <If Condition="[string.IsNullOrEmpty(Exception_msg)]" sap:VirtualizedContainerService.HintSize="569,240" sap2010:WorkflowViewState.IdRef="If_12">
+                <If.Then>
+                  <Assign sap:VirtualizedContainerService.HintSize="262,70" sap2010:WorkflowViewState.IdRef="Assign_8">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:String">[Mail_Body_Sent]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:String" xml:space="preserve">["Hi OICL Support team,&lt;p&gt;Unable to process the IDV. Find the details on below.,,&lt;table border=1&gt;&lt;tr&gt;&lt;B&gt;&lt;td&gt;Error Details&lt;/td&gt;	&lt;td&gt;"+Exception_msg+"&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;&lt;p&gt;&lt;B&gt;Regards,&lt;/B&gt;&lt;p&gt;Digital Helpdesk RPA"]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                </If.Then>
+                <If.Else>
+                  <Assign sap:VirtualizedContainerService.HintSize="262,70" sap2010:WorkflowViewState.IdRef="Assign_9">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:String">[Mail_Body_Sent]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:String" xml:space="preserve">["Hi OICL Support team,&lt;p&gt;Unable to process the IDV. Find the details on below.,,&lt;table border=1&gt;&lt;tr&gt;&lt;B&gt;&lt;td&gt;Error Details&lt;/td&gt;	&lt;td&gt;"+Exception_msg+"&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;&lt;p&gt;&lt;B&gt;Regards,&lt;/B&gt;&lt;p&gt;Digital Helpdesk RPA"]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                </If.Else>
+              </If>
+              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="SentMail_Outlook.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="569,123" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_9" UnSafe="False" WorkflowFileName="Mail\SentMail_Outlook.xaml">
+                <ui:InvokeWorkflowFile.Arguments>
+                  <InArgument x:TypeArguments="snm:MailMessage" x:Key="in_Mail_Reply_ID">[Mail_Reply_ID]</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_Mail_Body_Sent">[Mail_Body_Sent]</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_Mail_Subject_Inbox">[Mail_Body_Sent]</InArgument>
+                  <OutArgument x:TypeArguments="x:String" x:Key="Out_ExceptionMsg">[Exception_msg]</OutArgument>
+                  <OutArgument x:TypeArguments="x:Boolean" x:Key="out_b_IsSuccess">[b_IsSuccess]</OutArgument>
+                </ui:InvokeWorkflowFile.Arguments>
+              </ui:InvokeWorkflowFile>
+            </Sequence>
+          </ActivityAction>
+        </Catch>
+      </TryCatch.Catches>
+    </TryCatch>
+  </Sequence>
+</Activity>

@@ -1,0 +1,972 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="IDV_QueryExecution" this:IDV_QueryExecution.In_Mail_Attachment_DownloadFolder="D:\OICL\workspace\Manik\OICL\Input\01062022-180640" this:IDV_QueryExecution.In_Mail_Attachment_DownloadFolder_WithFile="D:\OICL\workspace\Manik\OICL\Input\01062022-180640\HYUNDAI AND KIA PVT CAR 10 YEAR IDV.XLSX" this:IDV_QueryExecution.In_ExcelSheetName_IDV="IDV'S" this:IDV_QueryExecution.In_SheetName_StateToCity_Master_Excel="Sheet1" this:IDV_QueryExecution.In_DB_ConnectionString="Dsn=OICL;uid=oicl_user;pwd=oicl_user;Database=oicl_dev3" this:IDV_QueryExecution.In_Master_IDVqueries_Excel="D:\OICL\workspace\Manik\OICL\OICL_Master\IDV_Queries.xlsx" this:IDV_QueryExecution.In_StateToCity_Master_Excel="D:\OICL\workspace\Manik\OICL\Input\state_to_city.xlsx" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:sc="clr-namespace:System.ComponentModel;assembly=System" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="In_Mail_Attachment_DownloadFolder" Type="InArgument(x:String)" />
+    <x:Property Name="In_Mail_Attachment_DownloadFolder_WithFile" Type="InArgument(x:String)" />
+    <x:Property Name="In_ExcelSheetName_IDV" Type="InArgument(x:String)" />
+    <x:Property Name="In_SheetName_StateToCity_Master_Excel" Type="InArgument(x:String)" />
+    <x:Property Name="In_dt_IDV_VehicleDetails" Type="InArgument(sd:DataTable)" />
+    <x:Property Name="In_dt_IDV_VehicleDetails_With_City" Type="InArgument(sd:DataTable)" />
+    <x:Property Name="In_dt_StateToCity" Type="InArgument(sd:DataTable)" />
+    <x:Property Name="In_FileName_WithoutExtension" Type="InArgument(x:String)" />
+    <x:Property Name="In_Excel_GeneratedFileWithCity_IDV" Type="InArgument(x:String)" />
+    <x:Property Name="In_DB_ConnectionString" Type="InArgument(x:String)" />
+    <x:Property Name="In_DB_Name" Type="InArgument(x:String)" />
+    <x:Property Name="In_Master_IDVqueries_Excel" Type="InArgument(x:String)" />
+    <x:Property Name="In_StateToCity_Master_Excel" Type="InArgument(x:String)" />
+    <x:Property Name="In_ds_QueryList" Type="InArgument(sd:DataSet)" />
+    <x:Property Name="In_L_Queries_AllSheetName" Type="InArgument(scg:List(x:String))" />
+    <x:Property Name="In_dt_IDV_VehicleDetails_With_OnlyCity_ReqCol" Type="InArgument(sd:DataTable)" />
+    <x:Property Name="In_dt_Query_List" Type="InArgument(sd:DataTable)" />
+    <x:Property Name="Out_b_IsQuerySuccess" Type="OutArgument(x:Boolean)" />
+    <x:Property Name="Out_StepName" Type="OutArgument(x:String)" />
+    <x:Property Name="Out_Query" Type="OutArgument(x:String)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>1734.5,13093</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>IDV_QueryExecution_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="33">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Runtime.InteropServices</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.Database</x:String>
+      <x:String>UiPath.Database.Activities</x:String>
+      <x:String>UiPath.DataTableUtilities</x:String>
+      <x:String>System.Activities.DynamicUpdate</x:String>
+      <x:String>System.Text.RegularExpressions</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="54">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>UiPath.Database</AssemblyReference>
+      <AssemblyReference>UiPath.Database.Activities</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>NPOI</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="IDV_QueryExecution" sap:VirtualizedContainerService.HintSize="1744.5,13028" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:Int32" Name="Query_ResultOutput" />
+      <Variable x:TypeArguments="x:Boolean" Default="True" Name="b_IsQuerySuccess" />
+      <Variable x:TypeArguments="x:Int32" Name="Count_InputRows" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_IDV_VehicleDetails_With_OnlyCity_ReqCol" />
+      <Variable x:TypeArguments="ui:DatabaseConnection" Name="DB_Conn" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_Query_Result" />
+      <Variable x:TypeArguments="x:String" Name="s_dt_Query_Result" />
+      <Variable x:TypeArguments="x:Int32" Default="0" Name="RowNo" />
+      <Variable x:TypeArguments="x:Int32" Name="TotalRows_dt_Query_List" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_Query_List" />
+      <Variable x:TypeArguments="x:Int32" Name="Param_MaxID" />
+      <Variable x:TypeArguments="x:String" Name="Param_TodayDate" />
+      <Variable x:TypeArguments="x:String" Name="Param" />
+      <Variable x:TypeArguments="s:DateTime" Name="TodayDate" />
+      <Variable x:TypeArguments="x:String" Name="Query" />
+      <Variable x:TypeArguments="x:String" Name="StepName" />
+      <Variable x:TypeArguments="x:String" Name="Query_Replaced" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="1702.5,62" sap2010:WorkflowViewState.IdRef="WriteLine_1" Text="--------------IDV_QueryExecution Started---------" />
+    <Assign sap:VirtualizedContainerService.HintSize="1702.5,60" sap2010:WorkflowViewState.IdRef="Assign_1">
+      <Assign.To>
+        <OutArgument x:TypeArguments="sd:DataTable">[dt_IDV_VehicleDetails_With_OnlyCity_ReqCol]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="sd:DataTable">[In_dt_IDV_VehicleDetails_With_OnlyCity_ReqCol]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <Assign sap:VirtualizedContainerService.HintSize="1702.5,60" sap2010:WorkflowViewState.IdRef="Assign_2">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:Int32">[Count_InputRows]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:Int32">[dt_IDV_VehicleDetails_With_OnlyCity_ReqCol.RowCount]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <Assign sap:VirtualizedContainerService.HintSize="1702.5,60" sap2010:WorkflowViewState.IdRef="Assign_8">
+      <Assign.To>
+        <OutArgument x:TypeArguments="sd:DataTable">[dt_Query_List]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="sd:DataTable">[In_dt_Query_List]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="1702.5,62" sap2010:WorkflowViewState.IdRef="WriteLine_3" Text="[&quot;Count_InputRows : &quot;+Count_InputRows.ToString]" />
+    <ui:DatabaseConnect DatabaseConnection="[DB_Conn]" DisplayName="Connect to database" sap:VirtualizedContainerService.HintSize="1702.5,59" sap2010:WorkflowViewState.IdRef="DatabaseConnect_1" ProviderName="System.Data.Odbc" ConnectionString="[In_DB_ConnectionString]" />
+    <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="1702.5,62" sap2010:WorkflowViewState.IdRef="WriteLine_13" Text="DB connected.." />
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="1702.5,258" sap2010:WorkflowViewState.IdRef="CommentOut_15">
+      <ui:CommentOut.Body>
+        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="376,180" sap2010:WorkflowViewState.IdRef="Sequence_64">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:ExecuteQuery ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DataTable="[dt_Query_Result]" DisplayName="Run query" ExistingDbConnection="[DB_Conn]" sap:VirtualizedContainerService.HintSize="334,88" sap2010:WorkflowViewState.IdRef="ExecuteQuery_2" Sql="use oicl_dev3; ">
+            <ui:ExecuteQuery.Parameters>
+              <scg:Dictionary x:TypeArguments="x:String, Argument" />
+            </ui:ExecuteQuery.Parameters>
+          </ui:ExecuteQuery>
+        </Sequence>
+      </ui:CommentOut.Body>
+    </ui:CommentOut>
+    <Assign sap:VirtualizedContainerService.HintSize="1702.5,60" sap2010:WorkflowViewState.IdRef="Assign_7">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:Int32">[TotalRows_dt_Query_List]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:Int32">[In_dt_Query_List.RowCount]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="1702.5,11833" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+      <TryCatch.Variables>
+        <Variable x:TypeArguments="x:String" Name="Exception_msg" />
+      </TryCatch.Variables>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <TryCatch.Try>
+        <ui:InterruptibleWhile CurrentIndex="{x:Null}" Condition="[TotalRows_dt_Query_List&gt;RowNo]" DisplayName="While" sap:VirtualizedContainerService.HintSize="1664.5,11601" sap2010:WorkflowViewState.IdRef="InterruptibleWhile_1">
+          <ui:InterruptibleWhile.Body>
+            <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="1628.5,11434" sap2010:WorkflowViewState.IdRef="Sequence_15">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="1586.5,62" sap2010:WorkflowViewState.IdRef="WriteLine_15" Text="[&quot;b_IsQuerySuccess : &quot;+b_IsQuerySuccess.ToString]" />
+              <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="1586.5,62" sap2010:WorkflowViewState.IdRef="WriteLine_16" Text="[&quot;Query Row No : &quot;+RowNo.ToString+&quot; || Query : &quot;+dt_Query_List.Rows(RowNo)(&quot;Query&quot;).ToString]" />
+              <Assign sap:VirtualizedContainerService.HintSize="1586.5,60" sap2010:WorkflowViewState.IdRef="Assign_55">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[StepName]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String">[dt_Query_List.Rows(RowNo)("StepName").ToString.Trim]</InArgument>
+                </Assign.Value>
+              </Assign>
+              <Assign sap:VirtualizedContainerService.HintSize="1586.5,60" sap2010:WorkflowViewState.IdRef="Assign_56">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[Query]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String">[dt_Query_List.Rows(RowNo)("Query").ToString.Trim]</InArgument>
+                </Assign.Value>
+              </Assign>
+              <If Condition="[b_IsQuerySuccess]" sap:VirtualizedContainerService.HintSize="1586.5,7721" sap2010:WorkflowViewState.IdRef="If_4">
+                <If.Then>
+                  <ui:IfElseIf DisplayName="Else If" sap:VirtualizedContainerService.HintSize="1269,7562" sap2010:WorkflowViewState.IdRef="IfElseIf_3">
+                    <ui:IfElseIf.ConditionBlocks>
+                      <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
+                        <ui:IfElseIfBlock BlockType="If" Condition="[dt_Query_List.Rows(RowNo)(&quot;ColumnName&quot;).ToString.ToLower=&quot;assign&quot;]">
+                          <ui:IfElseIfBlock.Then>
+                            <Sequence sap:VirtualizedContainerService.HintSize="864,2170" sap2010:WorkflowViewState.IdRef="Sequence_34">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="822,62" sap2010:WorkflowViewState.IdRef="WriteLine_41" Text="dt_Query_List.Rows(RowNo)(ColumnName).ToString.ToLower=assign" />
+                              <Assign sap:VirtualizedContainerService.HintSize="822,60" sap2010:WorkflowViewState.IdRef="Assign_31">
+                                <Assign.To>
+                                  <OutArgument x:TypeArguments="x:String">[Param]</OutArgument>
+                                </Assign.To>
+                                <Assign.Value>
+                                  <InArgument x:TypeArguments="x:String">
+                                    <Literal x:TypeArguments="x:String" Value="" />
+                                  </InArgument>
+                                </Assign.Value>
+                              </Assign>
+                              <ui:ExecuteQuery ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DataTable="[dt_Query_Result]" DisplayName="Execute Query" ExistingDbConnection="[DB_Conn]" sap:VirtualizedContainerService.HintSize="822,88" sap2010:WorkflowViewState.IdRef="ExecuteQuery_8" Sql="[dt_Query_List.Rows(RowNo)(&quot;Query&quot;).ToString.Trim+&quot;;&quot;]">
+                                <ui:ExecuteQuery.Parameters>
+                                  <scg:Dictionary x:TypeArguments="x:String, Argument" />
+                                </ui:ExecuteQuery.Parameters>
+                              </ui:ExecuteQuery>
+                              <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="822,62" sap2010:WorkflowViewState.IdRef="WriteLine_36" Text="[&quot;Execute Query : &quot;+dt_Query_Result.Rows(0)(&quot;A&quot;).ToString]" />
+                              <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="822,230" sap2010:WorkflowViewState.IdRef="CommentOut_11">
+                                <ui:CommentOut.Body>
+                                  <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="304,152" sap2010:WorkflowViewState.IdRef="Sequence_46">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_25">
+                                      <Assign.To>
+                                        <OutArgument x:TypeArguments="x:Int32">[Param_MaxID]</OutArgument>
+                                      </Assign.To>
+                                      <Assign.Value>
+                                        <InArgument x:TypeArguments="x:Int32">[Convert.ToInt32(dt_Query_Result.Rows(0)("A").ToString)]</InArgument>
+                                      </Assign.Value>
+                                    </Assign>
+                                  </Sequence>
+                                </ui:CommentOut.Body>
+                              </ui:CommentOut>
+                              <Assign sap:VirtualizedContainerService.HintSize="822,60" sap2010:WorkflowViewState.IdRef="Assign_28">
+                                <Assign.To>
+                                  <OutArgument x:TypeArguments="x:String">[Param]</OutArgument>
+                                </Assign.To>
+                                <Assign.Value>
+                                  <InArgument x:TypeArguments="x:String">[dt_Query_Result.Rows(0)("A").ToString]</InArgument>
+                                </Assign.Value>
+                              </Assign>
+                              <Assign sap:VirtualizedContainerService.HintSize="822,60" sap2010:WorkflowViewState.IdRef="Assign_26">
+                                <Assign.To>
+                                  <OutArgument x:TypeArguments="x:Int32">[Query_ResultOutput]</OutArgument>
+                                </Assign.To>
+                                <Assign.Value>
+                                  <InArgument x:TypeArguments="x:Int32">[dt_Query_Result.RowCount]</InArgument>
+                                </Assign.Value>
+                              </Assign>
+                              <If Condition="[dt_Query_List.Rows(RowNo)(&quot;ParamType&quot;).ToString.ToLower.Contains(&quot;date&quot;)]" sap:VirtualizedContainerService.HintSize="822,676" sap2010:WorkflowViewState.IdRef="If_11">
+                                <If.Then>
+                                  <Sequence sap:VirtualizedContainerService.HintSize="473,527" sap2010:WorkflowViewState.IdRef="Sequence_49">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="431,131" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+                                      <ui:MultipleAssign.AssignOperations>
+                                        <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                                          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
+                                            <ui:AssignOperation.To>
+                                              <OutArgument x:TypeArguments="x:String">[Param]</OutArgument>
+                                            </ui:AssignOperation.To>
+                                            <ui:AssignOperation.Value>
+                                              <InArgument x:TypeArguments="x:String">[dt_Query_Result.Rows(0)("A").ToString()]</InArgument>
+                                            </ui:AssignOperation.Value>
+                                          </ui:AssignOperation>
+                                          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_2">
+                                            <ui:AssignOperation.To>
+                                              <OutArgument x:TypeArguments="s:DateTime">[TodayDate]</OutArgument>
+                                            </ui:AssignOperation.To>
+                                            <ui:AssignOperation.Value>
+                                              <InArgument x:TypeArguments="s:DateTime">[Convert.ToDateTime(dt_Query_Result.Rows(0)("A"))]</InArgument>
+                                            </ui:AssignOperation.Value>
+                                          </ui:AssignOperation>
+                                        </scg:List>
+                                      </ui:MultipleAssign.AssignOperations>
+                                    </ui:MultipleAssign>
+                                    <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="431,62" sap2010:WorkflowViewState.IdRef="WriteLine_52" Text="[&quot;Before Date convert Param : &quot;+Param.ToString]" />
+                                    <Assign sap:VirtualizedContainerService.HintSize="431,60" sap2010:WorkflowViewState.IdRef="Assign_39">
+                                      <Assign.To>
+                                        <OutArgument x:TypeArguments="x:String">[Param]</OutArgument>
+                                      </Assign.To>
+                                      <Assign.Value>
+                                        <InArgument x:TypeArguments="x:String">[TodayDate.ToString("yyyy-MM-dd")]</InArgument>
+                                      </Assign.Value>
+                                    </Assign>
+                                    <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="431,62" sap2010:WorkflowViewState.IdRef="WriteLine_45" Text="[&quot;After Date convert Param : &quot;+Param.ToString]" />
+                                  </Sequence>
+                                </If.Then>
+                                <If.Else>
+                                  <Sequence sap:VirtualizedContainerService.HintSize="304,152" sap2010:WorkflowViewState.IdRef="Sequence_50">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_35">
+                                      <Assign.To>
+                                        <OutArgument x:TypeArguments="x:String">[Param]</OutArgument>
+                                      </Assign.To>
+                                      <Assign.Value>
+                                        <InArgument x:TypeArguments="x:String">[dt_Query_Result.Rows(0)("A").ToString]</InArgument>
+                                      </Assign.Value>
+                                    </Assign>
+                                  </Sequence>
+                                </If.Else>
+                              </If>
+                              <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="822,460" sap2010:WorkflowViewState.IdRef="CommentOut_5">
+                                <ui:CommentOut.Body>
+                                  <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="376,382" sap2010:WorkflowViewState.IdRef="Sequence_38">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <ui:ExecuteNonQuery ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" AffectedRecords="[Query_ResultOutput]" CommandType="Text" ExistingDbConnection="[DB_Conn]" sap:VirtualizedContainerService.HintSize="334,88" sap2010:WorkflowViewState.IdRef="ExecuteNonQuery_4" Sql="[dt_Query_List.Rows(RowNo)(&quot;Query&quot;).ToString]">
+                                      <ui:ExecuteNonQuery.Parameters>
+                                        <scg:Dictionary x:TypeArguments="x:String, Argument" />
+                                      </ui:ExecuteNonQuery.Parameters>
+                                    </ui:ExecuteNonQuery>
+                                    <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_23">
+                                      <Assign.To>
+                                        <OutArgument x:TypeArguments="x:Int32">[Param_MaxID]</OutArgument>
+                                      </Assign.To>
+                                      <Assign.Value>
+                                        <InArgument x:TypeArguments="x:Int32">[Convert.ToInt32(Query_ResultOutput)]</InArgument>
+                                      </Assign.Value>
+                                    </Assign>
+                                    <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="334,62" sap2010:WorkflowViewState.IdRef="WriteLine_34" Text="[&quot;Non Query Param_MaxID : &quot;+Param_MaxID.ToString]" />
+                                  </Sequence>
+                                </ui:CommentOut.Body>
+                              </ui:CommentOut>
+                            </Sequence>
+                          </ui:IfElseIfBlock.Then>
+                        </ui:IfElseIfBlock>
+                        <ui:IfElseIfBlock BlockType="ElseIf" Condition="[dt_Query_List.Rows(RowNo)(&quot;ColumnName&quot;).ToString.ToLower.Contains(&quot;replace&quot;)]">
+                          <ui:IfElseIfBlock.Then>
+                            <Sequence sap:VirtualizedContainerService.HintSize="1218,3617" sap2010:WorkflowViewState.IdRef="Sequence_37">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="1176,62" sap2010:WorkflowViewState.IdRef="WriteLine_40" Text="dt_Query_List.Rows(RowNo)(ColumnName).ToString.ToLower.Contains(replace)" />
+                              <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="1176,62" sap2010:WorkflowViewState.IdRef="WriteLine_55" Text="[&quot;Param : &quot;+Param.ToString]" />
+                              <ui:Replace BuilderPattern="Param+" sap:VirtualizedContainerService.HintSize="1176,59" sap2010:WorkflowViewState.IdRef="Replace_1" Input="[dt_Query_List.Rows(RowNo)(&quot;Query&quot;).ToString]" IsBuilderTabModified="True" Model="[{&quot;Index&quot;:0,&quot;OperationID&quot;:&quot;ADV&quot;,&quot;OperationName&quot;:&quot;Advanced&quot;,&quot;OperationValue&quot;:&quot;Param&quot;,&quot;QuantifierFirstValue&quot;:&quot;+&quot;,&quot;QuantifierID&quot;:&quot;OOM&quot;,&quot;QuantifierName&quot;:&quot;At least one (1 or more)&quot;,&quot;QuantifierSecondValue&quot;:null}]" Pattern="[dt_Query_List.Rows(RowNo)(&quot;ParamName&quot;).ToString]" RegexOption="IgnoreCase, Compiled" Replacement="[Param.ToString]" Result="[Query_Replaced]" />
+                              <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="1176,62" sap2010:WorkflowViewState.IdRef="WriteLine_33" Text="[&quot;Query Replaced : &quot;+Query_Replaced.ToString]" />
+                              <If Condition="[Query_Replaced.ToString.Trim.ToLower.Contains(&quot;select&quot;) AND ( Not Query_Replaced.ToString.Trim.ToLower.Contains(&quot;insert&quot;))]" sap:VirtualizedContainerService.HintSize="1176,1246" sap2010:WorkflowViewState.IdRef="If_14">
+                                <If.Then>
+                                  <Sequence sap:VirtualizedContainerService.HintSize="653,1097" sap2010:WorkflowViewState.IdRef="Sequence_55">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="611,62" sap2010:WorkflowViewState.IdRef="WriteLine_65" Text="Query_Replaced.ToString.Trim.ToLower.Contains(select)" />
+                                    <ui:ExecuteQuery ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DataTable="[dt_Query_Result]" DisplayName="Execute Query" ExistingDbConnection="[DB_Conn]" sap:VirtualizedContainerService.HintSize="611,88" sap2010:WorkflowViewState.IdRef="ExecuteQuery_11" Sql="[Query_Replaced]">
+                                      <ui:ExecuteQuery.Parameters>
+                                        <scg:Dictionary x:TypeArguments="x:String, Argument" />
+                                      </ui:ExecuteQuery.Parameters>
+                                    </ui:ExecuteQuery>
+                                    <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="611,62" sap2010:WorkflowViewState.IdRef="WriteLine_67" />
+                                    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="611,332" sap2010:WorkflowViewState.IdRef="CommentOut_13">
+                                      <ui:CommentOut.Body>
+                                        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="304,254" sap2010:WorkflowViewState.IdRef="Sequence_60">
+                                          <sap:WorkflowViewStateService.ViewState>
+                                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                            </scg:Dictionary>
+                                          </sap:WorkflowViewStateService.ViewState>
+                                          <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_52">
+                                            <Assign.To>
+                                              <OutArgument x:TypeArguments="x:String">[Param]</OutArgument>
+                                            </Assign.To>
+                                            <Assign.Value>
+                                              <InArgument x:TypeArguments="x:String">[dt_Query_Result.Rows(0)("A").ToString]</InArgument>
+                                            </Assign.Value>
+                                          </Assign>
+                                          <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="262,62" sap2010:WorkflowViewState.IdRef="WriteLine_63" Text="[&quot;After select Param : &quot;+Param.ToString]" />
+                                        </Sequence>
+                                      </ui:CommentOut.Body>
+                                    </ui:CommentOut>
+                                    <If Condition="[NOT dt_Query_List.Rows(RowNo)(&quot;ParamType&quot;).ToString.ToLower.Contains(&quot;date&quot;)]" sap:VirtualizedContainerService.HintSize="611,301" sap2010:WorkflowViewState.IdRef="If_15">
+                                      <If.Then>
+                                        <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_53">
+                                          <Assign.To>
+                                            <OutArgument x:TypeArguments="x:Int32">[Query_ResultOutput]</OutArgument>
+                                          </Assign.To>
+                                          <Assign.Value>
+                                            <InArgument x:TypeArguments="x:Int32">[Convert.ToInt32(dt_Query_Result.Rows(0)("A").ToString)]</InArgument>
+                                          </Assign.Value>
+                                        </Assign>
+                                      </If.Then>
+                                      <If.Else>
+                                        <Sequence sap:VirtualizedContainerService.HintSize="304,152" sap2010:WorkflowViewState.IdRef="Sequence_59">
+                                          <sap:WorkflowViewStateService.ViewState>
+                                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                            </scg:Dictionary>
+                                          </sap:WorkflowViewStateService.ViewState>
+                                          <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_54">
+                                            <Assign.To>
+                                              <OutArgument x:TypeArguments="x:Int32">[Query_ResultOutput]</OutArgument>
+                                            </Assign.To>
+                                            <Assign.Value>
+                                              <InArgument x:TypeArguments="x:Int32">1</InArgument>
+                                            </Assign.Value>
+                                          </Assign>
+                                        </Sequence>
+                                      </If.Else>
+                                    </If>
+                                  </Sequence>
+                                </If.Then>
+                                <If.Else>
+                                  <Sequence sap:VirtualizedContainerService.HintSize="478,552" sap2010:WorkflowViewState.IdRef="Sequence_56">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="436,62" sap2010:WorkflowViewState.IdRef="WriteLine_66" Text="Else part of Query_Replaced.ToString.Trim.ToLower.Contains(select)" />
+                                    <ui:ExecuteNonQuery ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" AffectedRecords="[Query_ResultOutput]" CommandType="Text" DisplayName="Execute Non Query" ExistingDbConnection="[DB_Conn]" sap:VirtualizedContainerService.HintSize="436,88" sap2010:WorkflowViewState.IdRef="ExecuteNonQuery_6" Sql="[Query_Replaced]">
+                                      <ui:ExecuteNonQuery.Parameters>
+                                        <scg:Dictionary x:TypeArguments="x:String, Argument" />
+                                      </ui:ExecuteNonQuery.Parameters>
+                                    </ui:ExecuteNonQuery>
+                                    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="436,230" sap2010:WorkflowViewState.IdRef="CommentOut_12">
+                                      <ui:CommentOut.Body>
+                                        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="304,152" sap2010:WorkflowViewState.IdRef="Sequence_57">
+                                          <sap:WorkflowViewStateService.ViewState>
+                                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                            </scg:Dictionary>
+                                          </sap:WorkflowViewStateService.ViewState>
+                                          <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_51">
+                                            <Assign.To>
+                                              <OutArgument x:TypeArguments="x:String">[Param]</OutArgument>
+                                            </Assign.To>
+                                            <Assign.Value>
+                                              <InArgument x:TypeArguments="x:String">[Query_ResultOutput.ToString]</InArgument>
+                                            </Assign.Value>
+                                          </Assign>
+                                        </Sequence>
+                                      </ui:CommentOut.Body>
+                                    </ui:CommentOut>
+                                  </Sequence>
+                                </If.Else>
+                              </If>
+                              <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="1176,62" sap2010:WorkflowViewState.IdRef="WriteLine_43" Text="[&quot;replace Query_ResultOutput : &quot;+Query_ResultOutput.ToString]" />
+                              <If Condition="[dt_Query_List.Rows(RowNo)(&quot;ColumnName&quot;).ToString.ToLower.Contains(&quot;assign&quot;)]" sap:VirtualizedContainerService.HintSize="1176,1732" sap2010:WorkflowViewState.IdRef="If_9">
+                                <If.Then>
+                                  <Sequence sap:VirtualizedContainerService.HintSize="917,1563" sap2010:WorkflowViewState.IdRef="Sequence_39">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="875,62" sap2010:WorkflowViewState.IdRef="WriteLine_38" Text="dt_Query_List.Rows(RowNo)(ColumnName).ToString.ToLower.Contains(assign)" />
+                                    <ui:ExecuteQuery ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DataTable="[dt_Query_Result]" DisplayName="Execute Query" ExistingDbConnection="[DB_Conn]" sap:VirtualizedContainerService.HintSize="875,88" sap2010:WorkflowViewState.IdRef="ExecuteQuery_9" Sql="[Query_Replaced]">
+                                      <ui:ExecuteQuery.Parameters>
+                                        <scg:Dictionary x:TypeArguments="x:String, Argument" />
+                                      </ui:ExecuteQuery.Parameters>
+                                    </ui:ExecuteQuery>
+                                    <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="875,62" sap2010:WorkflowViewState.IdRef="WriteLine_42" Text="[dt_Query_Result.Rows(0)(&quot;A&quot;).ToString]" />
+                                    <If Condition="[dt_Query_List.Rows(RowNo)(&quot;ParamType&quot;).ToString.ToLower.Contains(&quot;date&quot;)]" sap:VirtualizedContainerService.HintSize="875,1037" sap2010:WorkflowViewState.IdRef="If_12">
+                                      <If.Then>
+                                        <Sequence sap:VirtualizedContainerService.HintSize="526,888" sap2010:WorkflowViewState.IdRef="Sequence_51">
+                                          <sap:WorkflowViewStateService.ViewState>
+                                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                            </scg:Dictionary>
+                                          </sap:WorkflowViewStateService.ViewState>
+                                          <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="484,131" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
+                                            <ui:MultipleAssign.AssignOperations>
+                                              <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                                                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_3">
+                                                  <ui:AssignOperation.To>
+                                                    <OutArgument x:TypeArguments="x:String">[Param]</OutArgument>
+                                                  </ui:AssignOperation.To>
+                                                  <ui:AssignOperation.Value>
+                                                    <InArgument x:TypeArguments="x:String">[dt_Query_Result.Rows(0)("A").ToString()]</InArgument>
+                                                  </ui:AssignOperation.Value>
+                                                </ui:AssignOperation>
+                                                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_4">
+                                                  <ui:AssignOperation.To>
+                                                    <OutArgument x:TypeArguments="s:DateTime">[TodayDate]</OutArgument>
+                                                  </ui:AssignOperation.To>
+                                                  <ui:AssignOperation.Value>
+                                                    <InArgument x:TypeArguments="s:DateTime">[Convert.ToDateTime(dt_Query_Result.Rows(0)("A"))]</InArgument>
+                                                  </ui:AssignOperation.Value>
+                                                </ui:AssignOperation>
+                                              </scg:List>
+                                            </ui:MultipleAssign.AssignOperations>
+                                          </ui:MultipleAssign>
+                                          <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="484,62" sap2010:WorkflowViewState.IdRef="WriteLine_57" Text="[&quot;Before Date convert Param : &quot;+Param.ToString]" />
+                                          <If Condition="[dt_Query_List.Rows(RowNo)(&quot;ParamType&quot;).ToString.ToLower.Contains(&quot;datetime&quot;)]" sap:VirtualizedContainerService.HintSize="484,321" sap2010:WorkflowViewState.IdRef="If_13">
+                                            <If.Then>
+                                              <Sequence sap:VirtualizedContainerService.HintSize="304,152" sap2010:WorkflowViewState.IdRef="Sequence_53">
+                                                <sap:WorkflowViewStateService.ViewState>
+                                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                  </scg:Dictionary>
+                                                </sap:WorkflowViewStateService.ViewState>
+                                                <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_41">
+                                                  <Assign.To>
+                                                    <OutArgument x:TypeArguments="x:String">[Param]</OutArgument>
+                                                  </Assign.To>
+                                                  <Assign.Value>
+                                                    <InArgument x:TypeArguments="x:String">[TodayDate.ToString("yyyy-MM-dd HH:mm:ss")]</InArgument>
+                                                  </Assign.Value>
+                                                </Assign>
+                                              </Sequence>
+                                            </If.Then>
+                                            <If.Else>
+                                              <Sequence sap:VirtualizedContainerService.HintSize="200,84" sap2010:WorkflowViewState.IdRef="Sequence_54">
+                                                <sap:WorkflowViewStateService.ViewState>
+                                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                  </scg:Dictionary>
+                                                </sap:WorkflowViewStateService.ViewState>
+                                              </Sequence>
+                                            </If.Else>
+                                          </If>
+                                          <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="484,62" sap2010:WorkflowViewState.IdRef="WriteLine_58" Text="[&quot;After DateTime convert Param : &quot;+Param.ToString]" />
+                                          <Assign sap:VirtualizedContainerService.HintSize="484,60" sap2010:WorkflowViewState.IdRef="Assign_44">
+                                            <Assign.To>
+                                              <OutArgument x:TypeArguments="x:Int32">[Query_ResultOutput]</OutArgument>
+                                            </Assign.To>
+                                            <Assign.Value>
+                                              <InArgument x:TypeArguments="x:Int32">1</InArgument>
+                                            </Assign.Value>
+                                          </Assign>
+                                        </Sequence>
+                                      </If.Then>
+                                      <If.Else>
+                                        <Sequence sap:VirtualizedContainerService.HintSize="304,354" sap2010:WorkflowViewState.IdRef="Sequence_52">
+                                          <sap:WorkflowViewStateService.ViewState>
+                                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                            </scg:Dictionary>
+                                          </sap:WorkflowViewStateService.ViewState>
+                                          <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="262,62" sap2010:WorkflowViewState.IdRef="WriteLine_64" Text="Else dt_Query_List.Rows(RowNo)(ParamType).ToString.ToLower.Contains(date)" />
+                                          <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_42">
+                                            <Assign.To>
+                                              <OutArgument x:TypeArguments="x:String">[Param]</OutArgument>
+                                            </Assign.To>
+                                            <Assign.Value>
+                                              <InArgument x:TypeArguments="x:String">[dt_Query_Result.Rows(0)("A").ToString]</InArgument>
+                                            </Assign.Value>
+                                          </Assign>
+                                          <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_32">
+                                            <Assign.To>
+                                              <OutArgument x:TypeArguments="x:Int32">[Query_ResultOutput]</OutArgument>
+                                            </Assign.To>
+                                            <Assign.Value>
+                                              <InArgument x:TypeArguments="x:Int32">[Convert.ToInt32( dt_Query_Result.Rows(0)("A").ToString)]</InArgument>
+                                            </Assign.Value>
+                                          </Assign>
+                                        </Sequence>
+                                      </If.Else>
+                                    </If>
+                                    <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="875,62" sap2010:WorkflowViewState.IdRef="WriteLine_37" Text="[&quot;Param : &quot;+Param.ToString]" />
+                                  </Sequence>
+                                </If.Then>
+                                <If.Else>
+                                  <Sequence sap2010:WorkflowViewState.IdRef="Sequence_40">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                  </Sequence>
+                                </If.Else>
+                              </If>
+                            </Sequence>
+                          </ui:IfElseIfBlock.Then>
+                        </ui:IfElseIfBlock>
+                        <ui:IfElseIfBlock BlockType="ElseIf" Condition="[dt_Query_List.Rows(RowNo)(&quot;ColumnName&quot;).ToString.ToLower.Contains(&quot;table&quot;) or dt_Query_List.Rows(RowNo)(&quot;ColumnName&quot;).ToString.ToLower.Contains(&quot;bulk&quot;)]">
+                          <ui:IfElseIfBlock.Then>
+                            <Sequence DisplayName="BulkInsert" sap:VirtualizedContainerService.HintSize="376,411" sap2010:WorkflowViewState.IdRef="Sequence_36">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="334,62" sap2010:WorkflowViewState.IdRef="WriteLine_31" Text="--BulkInsert Started---" />
+                              <ui:InsertDataTable ContinueOnError="{x:Null}" AffectedRecords="[Query_ResultOutput]" DataTable="[dt_IDV_VehicleDetails_With_OnlyCity_ReqCol]" DisplayName="BulkInsert-motor_idvs_temp_2" ExistingDbConnection="[DB_Conn]" sap:VirtualizedContainerService.HintSize="334,115" sap2010:WorkflowViewState.IdRef="InsertDataTable_3" TableName="[dt_Query_List.Rows(RowNo)(&quot;Query&quot;).ToString]" />
+                              <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="334,62" sap2010:WorkflowViewState.IdRef="WriteLine_32" Text="--BulkInsert Completed---" />
+                            </Sequence>
+                          </ui:IfElseIfBlock.Then>
+                        </ui:IfElseIfBlock>
+                        <ui:IfElseIfBlock BlockType="ElseIf" Condition="[Not dt_Query_List.Rows(RowNo)(&quot;ColumnName&quot;).ToString.ToLower.Contains(&quot;table&quot;)]">
+                          <ui:IfElseIfBlock.Then>
+                            <Sequence sap:VirtualizedContainerService.HintSize="478,802" sap2010:WorkflowViewState.IdRef="Sequence_35">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="436,62" sap2010:WorkflowViewState.IdRef="WriteLine_39" Text="Not dt_Query_List.Rows(RowNo)(ColumnName).ToString.ToLower.Contains(table)" />
+                              <ui:ExecuteNonQuery ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" AffectedRecords="[Query_ResultOutput]" CommandType="Text" DisplayName="Execute Non Query" ExistingDbConnection="[DB_Conn]" sap:VirtualizedContainerService.HintSize="436,88" sap2010:WorkflowViewState.IdRef="ExecuteNonQuery_5" Sql="[dt_Query_List.Rows(RowNo)(&quot;Query&quot;).ToString.Trim+&quot;;&quot;]">
+                                <ui:ExecuteNonQuery.Parameters>
+                                  <scg:Dictionary x:TypeArguments="x:String, Argument" />
+                                </ui:ExecuteNonQuery.Parameters>
+                              </ui:ExecuteNonQuery>
+                              <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="436,480" sap2010:WorkflowViewState.IdRef="CommentOut_9">
+                                <ui:CommentOut.Body>
+                                  <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="376,402" sap2010:WorkflowViewState.IdRef="Sequence_44">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <ui:ExecuteQuery ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DataTable="[dt_Query_Result]" DisplayName="Execute Query" ExistingDbConnection="[DB_Conn]" sap:VirtualizedContainerService.HintSize="334,88" sap2010:WorkflowViewState.IdRef="ExecuteQuery_7" Sql="[dt_Query_List.Rows(RowNo)(&quot;Query&quot;).ToString.Trim+&quot;;&quot;]">
+                                      <ui:ExecuteQuery.Parameters>
+                                        <scg:Dictionary x:TypeArguments="x:String, Argument" />
+                                      </ui:ExecuteQuery.Parameters>
+                                    </ui:ExecuteQuery>
+                                    <ui:OutputDataTable DataTable="[dt_Query_Result]" DisplayName="Output Data Table" sap:VirtualizedContainerService.HintSize="334,80" sap2010:WorkflowViewState.IdRef="OutputDataTable_4" Text="[s_dt_Query_Result]" />
+                                    <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="334,62" sap2010:WorkflowViewState.IdRef="WriteLine_30" Text="[&quot;Query Result : &quot;+s_dt_Query_Result]" />
+                                  </Sequence>
+                                </ui:CommentOut.Body>
+                              </ui:CommentOut>
+                            </Sequence>
+                          </ui:IfElseIfBlock.Then>
+                        </ui:IfElseIfBlock>
+                      </sc:BindingList>
+                    </ui:IfElseIf.ConditionBlocks>
+                  </ui:IfElseIf>
+                </If.Then>
+                <If.Else>
+                  <Sequence sap:VirtualizedContainerService.HintSize="272.5,216" sap2010:WorkflowViewState.IdRef="Sequence_18">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="230.5,62" sap2010:WorkflowViewState.IdRef="WriteLine_20" Text="Query execution is failure..." />
+                    <ui:Break sap:VirtualizedContainerService.HintSize="230.5,22" sap2010:WorkflowViewState.IdRef="Break_1" />
+                  </Sequence>
+                </If.Else>
+              </If>
+              <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="1586.5,62" sap2010:WorkflowViewState.IdRef="WriteLine_21" Text="[&quot;Query_ResultOutput : &quot;+Query_ResultOutput.ToString]" />
+              <Assign sap:VirtualizedContainerService.HintSize="1586.5,60" sap2010:WorkflowViewState.IdRef="Assign_49">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[Out_StepName]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String">[dt_Query_List.Rows(RowNo)("StepName").ToString.Trim]</InArgument>
+                </Assign.Value>
+              </Assign>
+              <Assign sap:VirtualizedContainerService.HintSize="1586.5,60" sap2010:WorkflowViewState.IdRef="Assign_48">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[Out_Query]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String">[dt_Query_List.Rows(RowNo)("Query").ToString.Trim]</InArgument>
+                </Assign.Value>
+              </Assign>
+              <Assign sap:VirtualizedContainerService.HintSize="1586.5,60" sap2010:WorkflowViewState.IdRef="Assign_59">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:Boolean">[Out_b_IsQuerySuccess]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:Boolean">[b_IsQuerySuccess]</InArgument>
+                </Assign.Value>
+              </Assign>
+              <If Condition="[Query_ResultOutput=Count_InputRows]" sap:VirtualizedContainerService.HintSize="1586.5,702" sap2010:WorkflowViewState.IdRef="If_6">
+                <If.Then>
+                  <Sequence sap:VirtualizedContainerService.HintSize="304,254" sap2010:WorkflowViewState.IdRef="Sequence_19">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="262,62" sap2010:WorkflowViewState.IdRef="WriteLine_22" Text="Excel Rows &amp; Inserted rows are same..." />
+                    <Assign DisplayName="QueryExecution-Success" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_9">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:Boolean">[b_IsQuerySuccess]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:Boolean">True</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                  </Sequence>
+                </If.Then>
+                <If.Else>
+                  <Sequence sap:VirtualizedContainerService.HintSize="526,543" sap2010:WorkflowViewState.IdRef="Sequence_21">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="484,62" sap2010:WorkflowViewState.IdRef="WriteLine_23" Text="[&quot;Error : Excel Rows (&quot;+dt_IDV_VehicleDetails_With_OnlyCity_ReqCol.RowCount.ToString+&quot;) &amp; Inserted rows (&quot;+Query_ResultOutput.ToString+&quot;) are not same...&quot;]" />
+                    <Assign DisplayName="QueryExecution-Failure" sap:VirtualizedContainerService.HintSize="484,60" sap2010:WorkflowViewState.IdRef="Assign_10">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:Boolean">[b_IsQuerySuccess]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                    <If Condition="[Trim(dt_Query_List.Rows(RowNo)(&quot;Is_Match_TotalRecords&quot;).ToString.ToLower).Contains(&quot;n&quot;)]" sap:VirtualizedContainerService.HintSize="484,249" sap2010:WorkflowViewState.IdRef="If_5">
+                      <If.Then>
+                        <Assign DisplayName="QueryExecution-Success" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_11">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:Boolean">[b_IsQuerySuccess]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:Boolean">True</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                      </If.Then>
+                      <If.Else>
+                        <Sequence sap2010:WorkflowViewState.IdRef="Sequence_20">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </Sequence>
+                      </If.Else>
+                    </If>
+                  </Sequence>
+                </If.Else>
+              </If>
+              <ui:IfElseIf DisplayName="Else If" sap:VirtualizedContainerService.HintSize="1586.5,1210" sap2010:WorkflowViewState.IdRef="IfElseIf_4">
+                <ui:IfElseIf.ConditionBlocks>
+                  <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
+                    <ui:IfElseIfBlock BlockType="If" Condition="[Not String.IsNullOrEmpty(Convert.ToString(dt_Query_List.Rows(RowNo)(&quot;Success_QueryNo&quot;))) And b_IsQuerySuccess]">
+                      <ui:IfElseIfBlock.Then>
+                        <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="304,354" sap2010:WorkflowViewState.IdRef="Sequence_29">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_18">
+                            <Assign.To>
+                              <OutArgument x:TypeArguments="x:Int32">[RowNo]</OutArgument>
+                            </Assign.To>
+                            <Assign.Value>
+                              <InArgument x:TypeArguments="x:Int32">[Convert.ToInt32(dt_Query_List.Rows(RowNo)("Success_QueryNo"))]</InArgument>
+                            </Assign.Value>
+                          </Assign>
+                          <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="262,62" sap2010:WorkflowViewState.IdRef="WriteLine_27" Text="[&quot;Success Query No &quot;+RowNo.ToString]" />
+                          <Assign DisplayName="QueryExecution-Success" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_19">
+                            <Assign.To>
+                              <OutArgument x:TypeArguments="x:Boolean">[b_IsQuerySuccess]</OutArgument>
+                            </Assign.To>
+                            <Assign.Value>
+                              <InArgument x:TypeArguments="x:Boolean">True</InArgument>
+                            </Assign.Value>
+                          </Assign>
+                        </Sequence>
+                      </ui:IfElseIfBlock.Then>
+                    </ui:IfElseIfBlock>
+                    <ui:IfElseIfBlock BlockType="ElseIf" Condition="[Not String.IsNullOrEmpty(Convert.ToString(dt_Query_List.Rows(RowNo)(&quot;Failure_QueryNo&quot;))) And b_IsQuerySuccess=False]">
+                      <ui:IfElseIfBlock.Then>
+                        <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="304,354" sap2010:WorkflowViewState.IdRef="Sequence_30">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_20">
+                            <Assign.To>
+                              <OutArgument x:TypeArguments="x:Int32">[RowNo]</OutArgument>
+                            </Assign.To>
+                            <Assign.Value>
+                              <InArgument x:TypeArguments="x:Int32">[Convert.ToInt32(dt_Query_List.Rows(RowNo)("Failure_QueryNo"))]</InArgument>
+                            </Assign.Value>
+                          </Assign>
+                          <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="262,62" sap2010:WorkflowViewState.IdRef="WriteLine_28" Text="[&quot;Failure Query No &quot;+RowNo.ToString]" />
+                          <Assign DisplayName="QueryExecution-Success" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_21">
+                            <Assign.To>
+                              <OutArgument x:TypeArguments="x:Boolean">[b_IsQuerySuccess]</OutArgument>
+                            </Assign.To>
+                            <Assign.Value>
+                              <InArgument x:TypeArguments="x:Boolean">True</InArgument>
+                            </Assign.Value>
+                          </Assign>
+                        </Sequence>
+                      </ui:IfElseIfBlock.Then>
+                    </ui:IfElseIfBlock>
+                    <ui:IfElseIfBlock BlockType="Else">
+                      <ui:IfElseIfBlock.Then>
+                        <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="304,152" sap2010:WorkflowViewState.IdRef="Sequence_31">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_22">
+                            <Assign.To>
+                              <OutArgument x:TypeArguments="x:Int32">[RowNo]</OutArgument>
+                            </Assign.To>
+                            <Assign.Value>
+                              <InArgument x:TypeArguments="x:Int32">[RowNo+1]</InArgument>
+                            </Assign.Value>
+                          </Assign>
+                        </Sequence>
+                      </ui:IfElseIfBlock.Then>
+                    </ui:IfElseIfBlock>
+                  </sc:BindingList>
+                </ui:IfElseIf.ConditionBlocks>
+              </ui:IfElseIf>
+              <Assign sap:VirtualizedContainerService.HintSize="1586.5,60" sap2010:WorkflowViewState.IdRef="Assign_43">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:Int32">[Query_ResultOutput]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:Int32">0</InArgument>
+                </Assign.Value>
+              </Assign>
+              <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="1586.5,683" sap2010:WorkflowViewState.IdRef="CommentOut_4">
+                <ui:CommentOut.Body>
+                  <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="653,605" sap2010:WorkflowViewState.IdRef="Sequence_32">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <If Condition="[Not String.IsNullOrEmpty(Convert.ToString(dt_Query_List.Rows(RowNo)(&quot;Success_QueryNo&quot;))) And b_IsQuerySuccess]" sap:VirtualizedContainerService.HintSize="611,513" sap2010:WorkflowViewState.IdRef="If_7">
+                      <If.Then>
+                        <Sequence sap:VirtualizedContainerService.HintSize="304,354" sap2010:WorkflowViewState.IdRef="Sequence_25">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_13">
+                            <Assign.To>
+                              <OutArgument x:TypeArguments="x:Int32">[RowNo]</OutArgument>
+                            </Assign.To>
+                            <Assign.Value>
+                              <InArgument x:TypeArguments="x:Int32">[Convert.ToInt32(dt_Query_List.Rows(RowNo)("Success_QueryNo"))]</InArgument>
+                            </Assign.Value>
+                          </Assign>
+                          <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="262,62" sap2010:WorkflowViewState.IdRef="WriteLine_24" Text="[&quot;Success Query No &quot;+RowNo.ToString]" />
+                          <Assign DisplayName="QueryExecution-Success" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_14">
+                            <Assign.To>
+                              <OutArgument x:TypeArguments="x:Boolean">[b_IsQuerySuccess]</OutArgument>
+                            </Assign.To>
+                            <Assign.Value>
+                              <InArgument x:TypeArguments="x:Boolean">True</InArgument>
+                            </Assign.Value>
+                          </Assign>
+                        </Sequence>
+                      </If.Then>
+                      <If.Else>
+                        <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_12">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:Int32">[RowNo]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:Int32">[RowNo+1]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                      </If.Else>
+                    </If>
+                  </Sequence>
+                </ui:CommentOut.Body>
+              </ui:CommentOut>
+            </Sequence>
+          </ui:InterruptibleWhile.Body>
+        </ui:InterruptibleWhile>
+      </TryCatch.Try>
+      <TryCatch.Catches>
+        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="1668.5,22" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ActivityAction x:TypeArguments="s:Exception">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="s:Exception" Name="ex" />
+            </ActivityAction.Argument>
+            <Sequence sap:VirtualizedContainerService.HintSize="304,248" sap2010:WorkflowViewState.IdRef="Sequence_61">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_57">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[Exception_msg]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String">[ex.Message.ToString]</InArgument>
+                </Assign.Value>
+              </Assign>
+              <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_58">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:Boolean">[b_IsQuerySuccess]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+                </Assign.Value>
+              </Assign>
+            </Sequence>
+          </ActivityAction>
+        </Catch>
+      </TryCatch.Catches>
+      <TryCatch.Finally>
+        <Sequence sap:VirtualizedContainerService.HintSize="632,814" sap2010:WorkflowViewState.IdRef="Sequence_62">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <If Condition="[RowNo&gt;=Count_InputRows]" sap:VirtualizedContainerService.HintSize="590,314" sap2010:WorkflowViewState.IdRef="If_8">
+            <If.Then>
+              <Sequence sap:VirtualizedContainerService.HintSize="272.5,154" sap2010:WorkflowViewState.IdRef="Sequence_26">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="230.5,62" sap2010:WorkflowViewState.IdRef="WriteLine_25" Text="Success :: All queries Executed Successfully..." />
+              </Sequence>
+            </If.Then>
+            <If.Else>
+              <Sequence sap:VirtualizedContainerService.HintSize="272.5,154" sap2010:WorkflowViewState.IdRef="Sequence_27">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="230.5,62" sap2010:WorkflowViewState.IdRef="WriteLine_68" Text="Failure :: Queries not Executed successfully..." />
+              </Sequence>
+            </If.Else>
+          </If>
+          <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="590,62" sap2010:WorkflowViewState.IdRef="WriteLine_61" Text="[&quot;All Queries execution Status : &quot;+b_IsQuerySuccess.ToString]" />
+          <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="590,62" sap2010:WorkflowViewState.IdRef="WriteLine_60" Text="[&quot;Step Name : &quot;+StepName.ToString]" />
+          <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="590,62" sap2010:WorkflowViewState.IdRef="WriteLine_59" Text="[&quot;Last Executed Query : &quot;+Query.ToString.Trim]" />
+          <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="590,62" sap2010:WorkflowViewState.IdRef="WriteLine_2" Text="--------------IDV_QueryExecution Completed---------" />
+        </Sequence>
+      </TryCatch.Finally>
+    </TryCatch>
+  </Sequence>
+</Activity>

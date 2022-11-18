@@ -1,0 +1,350 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Read_IDV" this:Read_IDV.In_StateToCity_Master_Excel="D:\OICL\workspace\Manik\OICL\Input\state_to_city.xlsx" this:Read_IDV.In_SheetName_StateToCity_Master_Excel="Sheet1" this:Read_IDV.In_DB_ConnectionString="Dsn=OICL;uid=oicl_user;pwd=oicl_user;Database=oicl_dev3" this:Read_IDV.In_DB_Name="oicl_dev3" this:Read_IDV.In_Master_IDVqueries_Excel="D:\OICL\workspace\Manik\OICL\OICL_Master\IDV_Queries.xlsx" this:Read_IDV.In_Master_IDVqueries_Excel_SheetName="[{&quot;MOT-PRD-001&quot;,&quot;MOT-PRD-002&quot;,&quot;MOT-PRD-003&quot;,&quot;MOT-PRD-004&quot;,&quot;MOT-PRD-005&quot;}]" this:Read_IDV.In_Mail_Attachment_DownloadFolder="D:\OICL\workspace\Manik\OICL\Input\01062022-180640" this:Read_IDV.In_ExcelSheetName_IDV="IDV'S" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="In_StateToCity_Master_Excel" Type="InArgument(x:String)" />
+    <x:Property Name="In_SheetName_StateToCity_Master_Excel" Type="InArgument(x:String)" />
+    <x:Property Name="In_DB_ConnectionString" Type="InArgument(x:String)" />
+    <x:Property Name="In_DB_Name" Type="InArgument(x:String)" />
+    <x:Property Name="In_Master_IDVqueries_Excel" Type="InArgument(x:String)" />
+    <x:Property Name="In_Master_IDVqueries_Excel_SheetName" Type="InArgument(s:String[])" />
+    <x:Property Name="In_Mail_Attachment_DownloadFolder" Type="InArgument(x:String)" />
+    <x:Property Name="In_Mail_Attachment_DownloadFolder_WithFile" Type="InArgument(x:String)" />
+    <x:Property Name="In_ExcelSheetName_IDV" Type="InArgument(x:String)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>1155,4973</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>Read_IDV_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="31">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Runtime.InteropServices</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Activities.DynamicUpdate</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="32">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>NPOI</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="IDV_ReadExcel" sap:VirtualizedContainerService.HintSize="1035.5,4908" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="s:String[]" Name="FilesinFolder" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_IDV_VehicleDetails" />
+      <Variable x:TypeArguments="x:String" Name="s_dt_IDV_VehicleDetails" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_StateToCity" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_IDV_VehicleDetails_With_City" />
+      <Variable x:TypeArguments="x:String" Default="ANDHRA PRADESH" Name="LookUp_State" />
+      <Variable x:TypeArguments="x:String" Name="FileName_WithoutExtension" />
+      <Variable x:TypeArguments="x:String" Name="City_For_State" />
+      <Variable x:TypeArguments="x:Int32" Default="0" Name="Count_QuerySheet" />
+      <Variable x:TypeArguments="sd:DataSet" Name="ds_QueryList" />
+      <Variable x:TypeArguments="scg:List(x:String)" Name="L_Queries_AllSheetName" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="993.5,62" sap2010:WorkflowViewState.IdRef="WriteLine_4" Text="-------------ReadExcel_IDV started----------" />
+    <Assign sap:VirtualizedContainerService.HintSize="993.5,60" sap2010:WorkflowViewState.IdRef="Assign_1">
+      <Assign.To>
+        <OutArgument x:TypeArguments="s:String[]">[FilesinFolder]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="s:String[]">[Directory.GetFiles(In_Mail_Attachment_DownloadFolder)]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="993.5,4614" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[FilesinFolder]">
+      <ui:ForEach.Body>
+        <ActivityAction x:TypeArguments="x:String">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="x:String" Name="FileOneByOne" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="957.5,4489" sap2010:WorkflowViewState.IdRef="Sequence_2">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="915.5,62" sap2010:WorkflowViewState.IdRef="WriteLine_5" Text="[FileOneByOne]" />
+            <Assign sap:VirtualizedContainerService.HintSize="915.5,60" sap2010:WorkflowViewState.IdRef="Assign_4">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[FileName_WithoutExtension]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">[Path.GetFileNameWithoutExtension(FileOneByOne)]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <If Condition="[(Not FileName_WithoutExtension.trim.Contains(&quot;_WithCity&quot;)) And (FileName_WithoutExtension.ToLower.trim.Contains(&quot;idv&quot;) ) And (Not FileName_WithoutExtension.trim.Contains(&quot;~&quot;))And (FileOneByOne.ToLower.trim.Contains(&quot;xlsx&quot;))]" sap:VirtualizedContainerService.HintSize="915.5,4195" sap2010:WorkflowViewState.IdRef="If_1">
+              <If.Then>
+                <Sequence sap:VirtualizedContainerService.HintSize="598,4035" sap2010:WorkflowViewState.IdRef="Sequence_6">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ui:ReadRange Range="{x:Null}" AddHeaders="True" DataTable="[dt_IDV_VehicleDetails]" DisplayName="Read Range" sap:VirtualizedContainerService.HintSize="556,87" sap2010:WorkflowViewState.IdRef="ReadRange_1" SheetName="[In_ExcelSheetName_IDV]" WorkbookPath="[FileOneByOne]" />
+                  <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="556,794" sap2010:WorkflowViewState.IdRef="CommentOut_2">
+                    <ui:CommentOut.Body>
+                      <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="478,716" sap2010:WorkflowViewState.IdRef="Sequence_4">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <ui:OutputDataTable DataTable="[dt_IDV_VehicleDetails]" DisplayName="Output Data Table" sap:VirtualizedContainerService.HintSize="436,80" sap2010:WorkflowViewState.IdRef="OutputDataTable_1" Text="[s_dt_IDV_VehicleDetails]" />
+                        <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="436,232" sap2010:WorkflowViewState.IdRef="CommentOut_3">
+                          <ui:CommentOut.Body>
+                            <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="272.5,154" sap2010:WorkflowViewState.IdRef="Sequence_11">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="230.5,62" sap2010:WorkflowViewState.IdRef="WriteLine_1" Text="[s_dt_IDV_VehicleDetails]" />
+                            </Sequence>
+                          </ui:CommentOut.Body>
+                        </ui:CommentOut>
+                        <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="436,232" sap2010:WorkflowViewState.IdRef="CommentOut_4">
+                          <ui:CommentOut.Body>
+                            <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="272.5,154" sap2010:WorkflowViewState.IdRef="Sequence_12">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="230.5,62" sap2010:WorkflowViewState.IdRef="WriteLine_2" Text="[dt_IDV_VehicleDetails.Rows(1)(&quot;PRODUCT CODE&quot;).ToString]" />
+                            </Sequence>
+                          </ui:CommentOut.Body>
+                        </ui:CommentOut>
+                      </Sequence>
+                    </ui:CommentOut.Body>
+                  </ui:CommentOut>
+                  <Sequence DisplayName="Master_StateToCity_Excel" sap:VirtualizedContainerService.HintSize="556,279" sap2010:WorkflowViewState.IdRef="Sequence_8">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ui:ReadRange Range="{x:Null}" AddHeaders="True" DataTable="[dt_StateToCity]" DisplayName="Read Range" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="ReadRange_3" SheetName="[In_SheetName_StateToCity_Master_Excel]" WorkbookPath="[In_StateToCity_Master_Excel]" />
+                    <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_5">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="sd:DataTable">[dt_IDV_VehicleDetails_With_City]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="sd:DataTable">[dt_IDV_VehicleDetails.Copy]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                  </Sequence>
+                  <ui:AddDataColumn x:TypeArguments="x:String" AutoIncrement="{x:Null}" Column="{x:Null}" DefaultValue="{x:Null}" MaxLength="{x:Null}" Unique="{x:Null}" AllowDBNull="True" ColumnName="city_name" DataTable="[dt_IDV_VehicleDetails_With_City]" DisplayName="Add Data Column" sap:VirtualizedContainerService.HintSize="556,188" sap2010:WorkflowViewState.IdRef="AddDataColumn`1_1" />
+                  <Assign sap:VirtualizedContainerService.HintSize="556,60" sap2010:WorkflowViewState.IdRef="Assign_11">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="sd:DataSet">[ds_QueryList]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="sd:DataSet">[New DataSet("MyDataSet")]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <Assign sap:VirtualizedContainerService.HintSize="556,60" sap2010:WorkflowViewState.IdRef="Assign_12">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:Int32">[Count_QuerySheet]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:Int32">0</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <Sequence DisplayName="Config_Query" sap:VirtualizedContainerService.HintSize="556,1980" sap2010:WorkflowViewState.IdRef="Sequence_9">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="514,62" sap2010:WorkflowViewState.IdRef="WriteLine_12" Text="[&quot;IDV Queries Excel : &quot;+In_Master_IDVqueries_Excel.ToString]" />
+                    <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="Excel Application Scope" sap:VirtualizedContainerService.HintSize="514,471" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_1" InstanceCachePeriod="3000" WorkbookPath="[In_Master_IDVqueries_Excel]">
+                      <ui:ExcelApplicationScope.Body>
+                        <ActivityAction x:TypeArguments="ui:WorkbookApplication">
+                          <ActivityAction.Argument>
+                            <DelegateInArgument x:TypeArguments="ui:WorkbookApplication" Name="ExcelWorkbookScope" />
+                          </ActivityAction.Argument>
+                          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="476,362" sap2010:WorkflowViewState.IdRef="Sequence_14">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <ui:ExcelGetWorkbookSheets DisplayName="Get Workbook Sheets" sap:VirtualizedContainerService.HintSize="434,22" sap2010:WorkflowViewState.IdRef="ExcelGetWorkbookSheets_1" Sheets="[L_Queries_AllSheetName]" />
+                            <ui:ForEach x:TypeArguments="x:Object" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="434,208" sap2010:WorkflowViewState.IdRef="ForEach`1_4" Values="[L_Queries_AllSheetName]">
+                              <ui:ForEach.Body>
+                                <ActivityAction x:TypeArguments="x:Object">
+                                  <ActivityAction.Argument>
+                                    <DelegateInArgument x:TypeArguments="x:Object" Name="Excel_Queries_SheetName" />
+                                  </ActivityAction.Argument>
+                                  <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="200,84" sap2010:WorkflowViewState.IdRef="Sequence_15">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                  </Sequence>
+                                </ActivityAction>
+                              </ui:ForEach.Body>
+                            </ui:ForEach>
+                          </Sequence>
+                        </ActivityAction>
+                      </ui:ExcelApplicationScope.Body>
+                    </ui:ExcelApplicationScope>
+                    <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="514,1275" sap2010:WorkflowViewState.IdRef="ForEach`1_5" Values="[L_Queries_AllSheetName]">
+                      <ui:ForEach.Body>
+                        <ActivityAction x:TypeArguments="x:String">
+                          <ActivityAction.Argument>
+                            <DelegateInArgument x:TypeArguments="x:String" Name="Excel_SheetName" />
+                          </ActivityAction.Argument>
+                          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="478,1150" sap2010:WorkflowViewState.IdRef="Sequence_10">
+                            <Sequence.Variables>
+                              <Variable x:TypeArguments="sd:DataTable" Name="dt_QueryList" />
+                            </Sequence.Variables>
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="436,62" sap2010:WorkflowViewState.IdRef="WriteLine_11" Text="[Excel_SheetName]" />
+                            <ui:ReadRange Range="{x:Null}" AddHeaders="True" DataTable="[dt_QueryList]" DisplayName="Read Range" sap:VirtualizedContainerService.HintSize="436,87" sap2010:WorkflowViewState.IdRef="ReadRange_4" SheetName="[Excel_SheetName]" WorkbookPath="[In_Master_IDVqueries_Excel]" />
+                            <Assign sap:VirtualizedContainerService.HintSize="436,60" sap2010:WorkflowViewState.IdRef="Assign_8">
+                              <Assign.To>
+                                <OutArgument x:TypeArguments="x:String">[dt_QueryList.TableName]</OutArgument>
+                              </Assign.To>
+                              <Assign.Value>
+                                <InArgument x:TypeArguments="x:String">[Excel_SheetName]</InArgument>
+                              </Assign.Value>
+                            </Assign>
+                            <InvokeMethod DisplayName="Invoke Method" sap:VirtualizedContainerService.HintSize="436,135" sap2010:WorkflowViewState.IdRef="InvokeMethod_1" MethodName="Add">
+                              <InvokeMethod.TargetObject>
+                                <InArgument x:TypeArguments="sd:DataTableCollection">[ds_QueryList.Tables]</InArgument>
+                              </InvokeMethod.TargetObject>
+                              <InArgument x:TypeArguments="sd:DataTable">[dt_QueryList]</InArgument>
+                            </InvokeMethod>
+                            <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="436,352" sap2010:WorkflowViewState.IdRef="CommentOut_6">
+                              <ui:CommentOut.Body>
+                                <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="326,274" sap2010:WorkflowViewState.IdRef="Sequence_16">
+                                  <sap:WorkflowViewStateService.ViewState>
+                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                    </scg:Dictionary>
+                                  </sap:WorkflowViewStateService.ViewState>
+                                  <ui:OutputDataTable DataTable="[ds_QueryList.Tables(Count_QuerySheet)]" DisplayName="Output Data Table" sap:VirtualizedContainerService.HintSize="284,80" sap2010:WorkflowViewState.IdRef="OutputDataTable_3" Text="[s_dt_IDV_VehicleDetails]" />
+                                  <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="284,62" sap2010:WorkflowViewState.IdRef="WriteLine_9" Text="[s_dt_IDV_VehicleDetails]" />
+                                </Sequence>
+                              </ui:CommentOut.Body>
+                            </ui:CommentOut>
+                            <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="436,62" sap2010:WorkflowViewState.IdRef="WriteLine_10" Text="[&quot;Dataset table name : &quot;+ds_QueryList.Tables(Count_QuerySheet).TableName]" />
+                            <Assign sap:VirtualizedContainerService.HintSize="436,60" sap2010:WorkflowViewState.IdRef="Assign_10">
+                              <Assign.To>
+                                <OutArgument x:TypeArguments="x:Int32">[Count_QuerySheet]</OutArgument>
+                              </Assign.To>
+                              <Assign.Value>
+                                <InArgument x:TypeArguments="x:Int32">[Count_QuerySheet+1]</InArgument>
+                              </Assign.Value>
+                            </Assign>
+                          </Sequence>
+                        </ActivityAction>
+                      </ui:ForEach.Body>
+                    </ui:ForEach>
+                  </Sequence>
+                  <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="556,62" sap2010:WorkflowViewState.IdRef="WriteLine_3" Text="--------------------ReadExcel_IDV completed------------" />
+                  <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="IDV_GetCity.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="556,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="IDV\IDV_GetCity.xaml">
+                    <ui:InvokeWorkflowFile.Arguments>
+                      <InArgument x:TypeArguments="x:String" x:Key="In_DB_ConnectionString">[In_DB_ConnectionString]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="In_DB_Name">[In_DB_Name]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="In_Master_IDVqueries_Excel">[In_Master_IDVqueries_Excel]</InArgument>
+                      <InArgument x:TypeArguments="sd:DataSet" x:Key="In_ds_QueryList">[ds_QueryList]</InArgument>
+                      <InArgument x:TypeArguments="scg:List(x:String)" x:Key="In_L_Queries_AllSheetName">[L_Queries_AllSheetName]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="In_Mail_Attachment_DownloadFolder">[In_Mail_Attachment_DownloadFolder]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="In_Mail_Attachment_DownloadFolder_WithFile">[In_Mail_Attachment_DownloadFolder_WithFile]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="In_ExcelSheetName_IDV">[In_ExcelSheetName_IDV]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="In_StateToCity_Master_Excel">[In_StateToCity_Master_Excel]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="In_SheetName_StateToCity_Master_Excel">[In_SheetName_StateToCity_Master_Excel]</InArgument>
+                      <InArgument x:TypeArguments="sd:DataTable" x:Key="In_dt_IDV_VehicleDetails">[dt_IDV_VehicleDetails]</InArgument>
+                      <InArgument x:TypeArguments="sd:DataTable" x:Key="In_dt_IDV_VehicleDetails_With_City">[dt_IDV_VehicleDetails_With_City]</InArgument>
+                      <InArgument x:TypeArguments="sd:DataTable" x:Key="In_dt_StateToCity">[dt_StateToCity]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="In_FileName_WithoutExtension">[FileName_WithoutExtension]</InArgument>
+                    </ui:InvokeWorkflowFile.Arguments>
+                  </ui:InvokeWorkflowFile>
+                </Sequence>
+              </If.Then>
+              <If.Else>
+                <Sequence sap:VirtualizedContainerService.HintSize="272.5,154" sap2010:WorkflowViewState.IdRef="Sequence_7">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="230.5,62" sap2010:WorkflowViewState.IdRef="WriteLine_7" Text="[&quot;Invalid file : &quot;+FileOneByOne]" />
+                </Sequence>
+              </If.Else>
+            </If>
+          </Sequence>
+        </ActivityAction>
+      </ui:ForEach.Body>
+    </ui:ForEach>
+  </Sequence>
+</Activity>
